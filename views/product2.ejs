@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendify</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/price.css" />
+
+  <link rel="icon" href="/E-Commerce-logo.jpeg" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- CSS for Zoom Lens -->
+  <style>
+    .ProductImageContainer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #zoomLens {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid black;
+      background-repeat: no-repeat;
+      background-size: 250%;
+      display: none;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body style="background-color: seashell">
+  <!-- Navbar 1 -->
+  <nav class="navbar navbar-expand-lg" id="navbar1" style="background-color:rgb(209, 168, 123)">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="color: white" id="navbarBrand">
+        <img id="title" src="/title1.png" alt="" style="height: 30px; width: 100px" />
+      </a>
+
+      <form id="SearchForm" class="d-flex mx-auto" role="search" action="/search" method="GET">
+        <input type="text" name="q" required class="form-control" type="search" placeholder="Search" aria-label="Search"
+          style="background-color: white" id="searchInput" />
+        <button class="btn btn-outline-dark" type="submit" style="
+              background-color: rgb(240, 240, 240);
+              padding: 0px;
+              width: 40px;
+            " id="searchButton">
+          <img src="https://static.vecteezy.com/system/resources/previews/016/716/177/original/search-3d-icon-png.png"
+            style="
+                object-fit: cover;
+                width: 20px;
+                height: 20px;
+                margin: 0px;
+                padding: 0px;
+              " />
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg" style="background-color:rgb(255, 209, 176)" id="navbar2">
+    <ul class="navbar-nav" style="display: flex; flex-direction: row; align-items: center">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/home" style="color: Black">
+          <img src="/Home.png" style="object-fit: contain; width: 30px; height: 30px" />
+        </a>
+      </li>
+
+      <li class="nav-item" id="nav-cart">
+        <a class="nav-link active" aria-current="page" href="/cart" style="color: black; position: relative;">
+          <img src="/cart.png" style="object-fit: contain; width:30px; height: 30px;">
+          <span class="cart-text">Cart</span>
+          <span id="cart-count"
+            style="position: absolute; top: 0px; right: 0px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">
+          </span>
+
+        </a>
+      </li>
+      <li class="nav-item" id="nav-orders">
+        <a class="nav-link active" aria-current="page" href="/my-orders" style="color: black">
+          <img src="/Order.png" style="object-fit: contain; width: 30px; height: 30px" />
+          <span class="cart-text">Orders</span>
+        </a>
+      </li>
+
+      <li class="nav-item" id="SearchIcon">
+        <a class="nav-link active" aria-current="page" href="/SearchProduct" style="color: black">
+          <img src="/Search.png" style="object-fit: contain; width: 30px; height: 30px" />
+        </a>
+      </li>
+    </ul>
+
+    <div class="d-flex justify-content-end" style="position: fixed; right: 0">
+      <div class="dropdown">
+        <button class="d-flex align-items-center justify-content-center" id="Log_Button" type="button"
+          data-bs-toggle="dropdown" aria-expanded="false"
+          style="background-color: white; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; padding: 0; border: none;">
+          <% if (username) { %>
+            <span style="font-size: 18px; font-weight: bold; color: black;">
+              <%= username.charAt(0).toUpperCase() %>
+            </span>
+            <% } else { %>
+              <img id="Log_Buttonimage"
+                src="https://static.vecteezy.com/system/resources/previews/000/550/731/original/user-icon-vector.jpg"
+                alt="User Icon" style="width: 100%; height: 100%; object-fit: cover;" />
+              <% } %>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(226, 226, 226)">
+          <li class="nav-item" style="margin-top: 15px">
+            <a class="nav-link" href="/signup" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Signup</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px">
+            <a class="nav-link" href="/login" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Login</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+            <a class="nav-link" href="/logout" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Logout</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+            <a class="nav-link" href="/admin-Form" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Admin</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Display Section -->
+  <div class="container" id="ProductCard">
+    <div class="row">
+      <!-- Product Images -->
+      <div class="col-md-6" id="image-container">
+        <div id="productExtraImages"
+          style="display: flex; flex-direction: column; border: 4px solid rgb(220, 217, 217); padding: 10px; border-radius: 20px; position: relative;">
+          <!-- Main Image -->
+          <div id="mainImageContainer"
+            style="display: flex; justify-content: center; position: relative; overflow: hidden;">
+            <div class="ProductImageContainer" style="position: relative;">
+              <div id="zoomLens" style="height: 90px; width: 90px;"></div>
+              <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="product2Image" id="mainImage"
+                style="width: 80%; cursor: zoom-in;" />
+            </div>
+          </div>
+
+          <!-- Extra Images -->
+          <div id="extraimages"
+            style="display: flex; flex-direction: row; justify-content: center; margin-top: 20px; margin-bottom: 20px; padding: 10px;">
+            <div class="ProductImageExtra">
+              <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="product2Image extraImage" />
+            </div>
+
+            <% if (product.imageUrl2 && product.imageUrl2 !=="null" ) { %>
+              <div class="ProductImageExtra">
+                <img src="<%= product.imageUrl2 %>" alt="<%= product.title %>" class="product2Image extraImage" />
+              </div>
+              <% } %>
+
+                <% if (product.imageUrl3 && product.imageUrl3 !=="null" ) { %>
+                  <div class="ProductImageExtra">
+                    <img src="<%= product.imageUrl3 %>" alt="<%= product.title %>" class="product2Image extraImage" />
+                  </div>
+                  <% } %>
+
+                    <% if (product.imageUrl4 && product.imageUrl4 !=="null" ) { %>
+                      <div class="ProductImageExtra">
+                        <img src="<%= product.imageUrl4 %>" alt="<%= product.title %>"
+                          class="product2Image extraImage" />
+                      </div>
+                      <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details -->
+      <div class="col-md-6"  id="details-container">
+        <h3 class="font-weight-bold" style="font-family: Arial, Helvetica, sans-serif;">
+          <%= product.title %>
+        </h3>
+
+        <!-- Price Section -->
+        <% if (product.stock !==0) { %>
+          <div class="deal-card" data-price="<%= product.price %>">
+            <span class="deal-tag">Limited time deal</span>
+            <div class="price-container">
+              <span class="discount discount-percentage"></span>
+              <span class="final-price"></span>
+              <span class="original-price"></span>
+            </div>
+            <p class="delivery-info">
+              Get it by <strong class="delivery-date"></strong>
+            </p>
+            <p class="delivery-method">FREE Delivery by Amazon</p>
+          </div>
+          <% } else { %>
+            <div class="deal-card" data-price="<%= product.price %>">
+              <div class="price-container">
+                <span class="discount discount-percentage"></span>
+                <span class="final-price"></span>
+                <span class="original-price"></span>
+              </div>
+            </div>
+            <% } %>
+              <!-- Reviews Section -->
+              <% if (product.reviews.length> 0) { %>
+                <% let bestReview=product.reviews.reduce((best, review)=>
+                  review.rating > best.rating ? review : best, product.reviews[0]
+                  );
+                  %>
+                  <p>
+                    <strong>Rating:</strong>
+                    <% for (let i=1; i <=5; i++) { %>
+                      <% if (i <=bestReview.rating) { %>
+                        <i class="fas fa-star" style="color: gold;"></i>
+                        <% } else { %>
+                          <i class="far fa-star" style="color: lightgray;"></i>
+                          <% } %>
+                            <% } %>
+                  </p>
+                  <% } else { %>
+                    <p>No reviews yet</p>
+                    <% } %>
+                      <br>
+                      <!-- Size Selection -->
+                      <% if (product.sizes.length> 0) { %>
+                        <div class="size-selection">
+                          <% product.sizes.forEach(size=> { %>
+                            <div class="size-circle" data-size="<%= size.size %>" data-stock="<%= size.stock %>"
+                              style="background-color: <%= size.stock > 0 ? '#003f02' : '#B303E6' %>;"
+                              onclick="selectSize(this)">
+                              <span class="size-text">
+                                <%= size.size %>
+                              </span>
+                            </div>
+                            <% }) %>
+                        </div>
+                        <% } %>
+
+                          <!-- Color Options -->
+                          <div style="display: flex; justify-content: start; margin-top: 20px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: start;" id="extraimages">
+                              <% if (product.colorImages && product.colorImages.length> 0) { %>
+                                <% product.colorImages.forEach(function(imgUrl, index) { %>
+                                  <div class="ProductImageExtra">
+                                    <img src="<%= imgUrl %>" alt="<%= product.title %> color <%= index + 1 %>"
+                                      class="product2Image extraImage selectable-color-image"
+                                      data-color-url="<%= imgUrl %>"
+                                      style="cursor: pointer; border: 2px solid transparent; border-radius: 6px;" />
+                                  </div>
+                                  <% }); %>
+                                    <% } %>
+                            </div>
+                          </div>
+
+
+
+
+
+                          <% const hasSize=product.sizes && product.sizes.length> 0 && product.sizes[0] &&
+                            product.sizes[0].size;
+                            %>
+                            <a id="buyNowBtn" href="#"
+                              class="btn <% if (product.stock !== 0 && hasSize) { %>btn-primary<% } else { %>btn-secondary<% } %>"
+                              <% if (product.stock===0 || !hasSize) { %>disabled<% } %>>
+                                <% if (product.stock !==0 && hasSize) { %>Buy Now<% } else { %>Unavailable<% } %>
+                            </a>
+
+                            <button class="btn btn-primary add-to-cart-btn" data-product-id="<%= product._id %>">
+                              Add to Cart
+                            </button>
+                            <div class="ProductDescription" style="margin-top: 10px;">
+                              <h5>Description:</h5>
+                              <ul id="descriptionList" class="description-list"></ul>
+                              <button id="toggleButton" class="btn btn-primary btn-sm mt-2">Show More</button>
+                            </div>
+
+      </div>
+
+      <!-- Description -->
+
+    </div>
+  </div>
+
+  <br>
+  <div class="container-fluid text-light text-center py-3" style="background-color: seashell;">
+    <h5 style="text-align: start">
+      <a href="/all-products" id="IndexExplore" style="margin-left: 10px;">Related Items</a>
+    </h5>
+
+    <div class="container my-1" id="ScreenMargin">
+      <div class="row flex-row flex-nowrap scrollable-container custom-row">
+        <% if (relatedProducts && relatedProducts.length> 0) { %>
+          <% relatedProducts.forEach(related=> { %>
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3 g-0" id="card">
+              <div class="card custom-card responsive-card" style="height: 100%">
+                <img src="<%= related.imageUrl %>" class="card-img-top" alt="<%= related.title %>" />
+                <div class="card-body d-flex flex-column" id="scrollBody">
+                  <h5 class="card-title text-truncate">
+                    <a href="/product/<%= related._id %>" style="text-decoration: none; color: inherit;">
+                      <%= related.title %>
+                    </a>
+                  </h5>
+                  <div class="deal-card" data-price="<%= related.price %>">
+                    <span class="deal-tag">Limited time deal</span>
+                    <div class="price-container">
+                      <span class="discount discount-percentage"></span>
+                      <!-- Discount percentage will be updated by JS -->
+                      <span class="final-price"></span> <!-- Final price will be updated by JS -->
+                      <span class="original-price"></span> <!-- Original price will be updated by JS -->
+                    </div>
+                    <p class="delivery-date"></p> <!-- Delivery date will be updated by JS -->
+                  </div>
+
+                  <% if (related.reviews.length> 0) { %>
+                    <% let bestReview=related.reviews.reduce((best, review)=>
+                      review.rating > best.rating ? review : best, related.reviews[0]
+                      );
+                      %>
+                      <p id="indexrating">
+                        <strong>Rating:</strong>
+                        <% for (let i=1; i <=5; i++) { %>
+                          <% if (i <=bestReview.rating) { %>
+                            <i class="fas fa-star" style="color: gold;"></i>
+                            <% } else { %>
+                              <i class="far fa-star" style="color: lightgray;"></i>
+                              <% } %>
+                                <% } %>
+                      </p>
+                      <% } else { %>
+                        <p>No reviews yet</p>
+                        <% } %>
+
+                </div>
+              </div>
+            </div>
+            <% }) %>
+              <% } else { %>
+                <div class="col-12 text-center">
+                  <p class="text-muted">No related products available.</p>
+                </div>
+                <% } %>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <hr>
+
+
+  <hr>
+  <h3
+    style="text-align: center; background-color: rgb(255, 209, 176); font-style: italic; padding: 10px; margin-top: 20px;">
+    Customer Reviews
+  </h3>
+
+  <% const totalReviews=product.reviews.length; const ratingCounts=[0, 0, 0, 0, 0]; let totalRating=0;
+    product.reviews.forEach((review)=> {
+    const rating = review.rating;
+    if (rating >= 1 && rating <= 5) { ratingCounts[rating - 1]++; totalRating +=rating; } }); const
+      avgRating=totalReviews> 0 ? (totalRating / totalReviews).toFixed(1) : "0.0";
+      %>
+
+
+
+      <div class="review-container">
+
+        <!-- Left Side: Rating Chart -->
+        <div class="chart-section">
+          <p style="font-weight: bold; font-size: 18px;">Customer reviews</p>
+          <p style="font-size: 16px;">
+            <% for (let i=1; i <=5; i++) { %>
+              <% if (i <=Math.round(avgRating)) { %>
+                <i class="fas fa-star" style="color: orange;"></i>
+                <% } else { %>
+                  <i class="far fa-star" style="color: orange;"></i>
+                  <% } %>
+                    <% } %>
+                      <strong>
+                        <%= avgRating %>
+                      </strong> out of 5
+          </p>
+          <p style="color: gray;">
+            <%= totalReviews %> global ratings
+          </p>
+
+          <% for (let i=4; i>= 0; i--) {
+            const count = ratingCounts[i];
+            const percentage = totalReviews > 0 ? ((count / totalReviews) * 100).toFixed(0) : 0;
+            %>
+            <div class="rating-bar">
+              <span>
+                <%= i + 1 %> star
+              </span>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: <%= percentage %>%"></div>
+              </div>
+              <span>
+                <%= percentage %>%
+              </span>
+            </div>
+            <% } %>
+        </div>
+
+        <!-- Right Side: Individual Reviews -->
+        <div class="individual-reviews">
+          <% if (product.reviews.length> 0) { %>
+            <% product.reviews.forEach(review=> { %>
+              <div class="review">
+                <p><strong>
+                    <%= review.username %>
+                  </strong> - <%= review.date.toDateString() %>
+                </p>
+                <p><strong>Rating:</strong>
+                  <% for (let i=1; i <=5; i++) { %>
+                    <% if (i <=review.rating) { %>
+                      <i class="fas fa-star" style="color: gold;"></i>
+                      <% } else { %>
+                        <i class="far fa-star" style="color: lightgray;"></i>
+                        <% } %>
+                          <% } %>
+                </p>
+                <p>
+                  <%= review.comment %>
+                </p>
+              </div>
+              <% }) %>
+                <% } else { %>
+                  <p>No reviews yet. Be the first to review this product!</p>
+                  <% } %>
+        </div>
+
+      </div>
+
+      <div style="height: 500px"></div>
+
+      <!-- JavaScript for Image Swap & Zoom Effect -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const mainImage = document.getElementById("mainImage");
+          const extraImages = document.querySelectorAll(".extraImage");
+          const zoomLens = document.getElementById("zoomLens");
+          const descriptionList = document.getElementById("descriptionList");
+          const toggleButton = document.getElementById("toggleButton");
+
+          // Handle product description
+          const descriptionText = `<%= product.description.replace(/\r\n|\r|\n/g, "||") %>`; // Handle new lines
+          const descriptionArray = descriptionText
+            .split("||")
+            .filter((line) => line.trim() !== "");
+
+          let isExpanded = false;
+          const maxLines = 2; // Number of points to show initially
+
+          function renderList() {
+            descriptionList.innerHTML = ""; // Clear previous content
+            const itemsToShow = isExpanded ? descriptionArray.length : maxLines;
+
+            for (
+              let i = 0;
+              i < Math.min(itemsToShow, descriptionArray.length);
+              i++
+            ) {
+              const li = document.createElement("li");
+              li.textContent = descriptionArray[i].trim();
+              descriptionList.appendChild(li);
+            }
+
+            toggleButton.textContent = isExpanded ? "Show Less" : "Show More";
+          }
+
+          toggleButton.addEventListener("click", function () {
+            isExpanded = !isExpanded;
+            renderList();
+          });
+
+          renderList(); // Initial rendering
+
+          // Image swap functionality
+          extraImages.forEach((image) => {
+            image.addEventListener("click", function () {
+              mainImage.src = this.src;
+              zoomLens.style.backgroundImage = `url(${this.src})`;
+            });
+          });
+
+          // Amazon-Style Zoom Effect (Inside Image)
+          mainImage.addEventListener("mousemove", function (e) {
+            zoomLens.style.display = "block";
+
+            const { left, top, width, height } =
+              mainImage.getBoundingClientRect();
+            let x = e.pageX - left - window.scrollX;
+            let y = e.pageY - top - window.scrollY;
+
+            x = Math.max(
+              zoomLens.offsetWidth / 2,
+              Math.min(x, width - zoomLens.offsetWidth / 2)
+            );
+            y = Math.max(
+              zoomLens.offsetHeight / 2,
+              Math.min(y, height - zoomLens.offsetHeight / 2)
+            );
+
+            zoomLens.style.left = `${x}px`;
+            zoomLens.style.top = `${y}px`;
+
+            // Calculate zoomed image position inside the lens
+            const zoomFactor = 2.5;
+            const bgX = -x * zoomFactor + "px";
+            const bgY = -y * zoomFactor + "px";
+
+            zoomLens.style.backgroundImage = `url(${mainImage.src})`;
+            zoomLens.style.backgroundSize = `${width * zoomFactor}px ${height * zoomFactor
+              }px`;
+            zoomLens.style.backgroundPosition = `${bgX} ${bgY}`;
+          });
+
+          mainImage.addEventListener("mouseleave", function () {
+            zoomLens.style.display = "none";
+          });
+
+          mainImage.addEventListener("mouseenter", function () {
+            zoomLens.style.backgroundImage = `url(${mainImage.src})`;
+          });
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          let productCards = document.querySelectorAll(".deal-card");
+
+          let today = new Date();
+          let daySeed = today.getDate(); // Use the date to change discounts daily
+
+          productCards.forEach((card, index) => {
+            let actualPrice = parseFloat(card.getAttribute("data-price"));
+
+            if (!isNaN(actualPrice) && actualPrice > 0) {
+              // Generate a unique discount for each product (changes daily)
+              let baseDiscount = ((index * 7 + daySeed) % 31) + 10; // Generates 10% - 40%
+              let discountPercentage = Math.min(Math.max(baseDiscount, 10), 40); // Ensure it's within bounds
+
+              // Generate fake original price variation based on actual price
+              let priceVariation =
+                actualPrice >= 1000
+                  ? Math.floor(Math.random() * (200 - 50 + 1)) + 50 // ₹50 - ₹200 for 1000+
+                  : actualPrice >= 100
+                    ? Math.floor(Math.random() * (20 - 5 + 1)) + 5 // ₹5 - ₹20 for 100 - 999
+                    : Math.floor(Math.random() * (5 - 1 + 1)) + 1; // ₹1 - ₹5 for < 100
+
+              let updatedPrice = actualPrice + priceVariation;
+
+              // Generate fake original price (inflated)
+              let fakeIncreasePercentage =
+                Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 10% - 30%
+              let increasedPrice = Math.round(
+                updatedPrice * (1 + fakeIncreasePercentage / 100)
+              );
+
+              // Calculate delivery date (1 week from today)
+              let deliveryDate = new Date(today);
+              deliveryDate.setDate(today.getDate() + 7);
+              let formattedDate = deliveryDate.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+              });
+
+              // Format price display
+              let formatPrice = (price) => `₹${price.toFixed(2)}`;
+
+              // Update UI inside the specific product card
+              card.querySelector(".original-price").innerText =
+                formatPrice(increasedPrice);
+              card.querySelector(
+                ".discount-percentage"
+              ).innerText = `-${discountPercentage}%`;
+              card.querySelector(".final-price").innerText =
+                formatPrice(actualPrice);
+              card.querySelector(".delivery-date").innerText = formattedDate;
+            } else {
+              console.error("Invalid product price:", actualPrice);
+            }
+          });
+        });
+      </script>
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          fetch('/cart/count')
+            .then(res => res.json())
+            .then(data => {
+              updateCartBadge(data.totalItems || 0);
+            })
+            .catch(err => {
+              console.error('Error fetching cart count:', err);
+            });
+        });
+
+        function updateCartBadge(count) {
+          const cartCountElem = document.getElementById('cart-count');
+          if (!cartCountElem) return; // safety check
+
+          if (count > 0) {
+            cartCountElem.textContent = count;
+            cartCountElem.style.display = 'inline';
+          } else {
+            cartCountElem.style.display = 'none';
+          }
+        }
+      </script>
+      <script>
+        let selectedSize = null;
+        let selectedColor = null;
+
+        const buyNowButton = document.querySelector('#buyNowBtn');
+        const productId = "<%= product._id %>";
+
+        // Handle size selection
+        document.querySelectorAll('.size-circle').forEach(circle => {
+          circle.addEventListener('click', function () {
+            // Remove previous selection
+            document.querySelectorAll('.size-circle').forEach(item => item.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedSize = this.getAttribute('data-size');
+            updateBuyNowLink();
+          });
+        });
+
+        // Handle color image selection
+        document.querySelectorAll('.selectable-color-image').forEach(img => {
+          img.addEventListener('click', function () {
+            // Deselect all first
+            document.querySelectorAll('.selectable-color-image').forEach(i => {
+              i.style.border = '2px solid transparent';
+            });
+
+            // Highlight selected
+            this.style.border = '2px solid #007bff';
+            selectedColor = this.getAttribute('data-color-url');
+            updateBuyNowLink();
+          });
+        });
+
+        // Update Buy Now button based on selections
+        function updateBuyNowLink() {
+          if (selectedSize && selectedColor) {
+            buyNowButton.href = `/place-order?product_id=${productId}&size=${encodeURIComponent(selectedSize)}&color=${encodeURIComponent(selectedColor)}&quantity=1`;
+          }
+        }
+
+        // Prevent empty selections
+        buyNowButton.addEventListener("click", function (e) {
+          if (!selectedSize || !selectedColor) {
+            e.preventDefault();
+            alert("Please select both a size and a color before continuing.");
+          }
+        });
+      </script>
+
+      <script>
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+          button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            const quantity = 1; // You can make this dynamic by allowing users to select quantity.
+
+            // Send the productId and quantity to the server
+            fetch('/cart/add', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ productId, quantity })
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  // Update the UI, for example, showing a success message or updating the cart count
+                  alert(data.message); // You can replace this with your own UI update logic
+                  updateCartCount(data.cartCount);
+                } else {
+                  alert('Failed to add product to cart.');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                alert('Please login to add items to the cart.');
+              });
+          });
+        });
+
+        // Function to update the cart count in your UI (for example, in a cart icon)
+        function updateCartCount(cartCount) {
+          const cartCountElement = document.getElementById('cart-count');
+          if (cartCountElement) {
+            cartCountElement.textContent = cartCount;
+          }
+        }
+      </script>
+      <script>
+        const imageContainer = document.getElementById('image-container');
+const detailsContainer = document.getElementById('details-container');
+
+detailsContainer.addEventListener('scroll', () => {
+  // Get the height of both containers and the scroll position
+  const imageHeight = imageContainer.getBoundingClientRect().height;
+  const detailsHeight = detailsContainer.getBoundingClientRect().height;
+
+  // Check if the details container has scrolled to the bottom
+  if (detailsContainer.scrollTop + detailsHeight >= detailsContainer.scrollHeight) {
+    imageContainer.style.position = 'relative'; // Allow the image container to scroll with the content
+  } else {
+    imageContainer.style.position = 'sticky'; // Keep the image container sticky at the top
+  }
+});
+
+        </script>
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+      <script src="app.js"></script>
+      <script src="custom.js"></script>
+
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <script src="google-signin.js"></script>
+      <script src="facebook-signin.js"></script>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+
+</html>

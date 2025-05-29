@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trendify</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/effects.css" />
+    <link rel="icon" href="E-Commerce-logo.jpeg" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+  </head>
+  <body style="background-color: seashell">
+    <!-- Navbar 1 -->
+    <!-- Navbar 1 -->
+  <nav class="navbar navbar-expand-lg" id="navbar1" style=" background-color:rgb(209, 168, 123);
+  ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color: white" id="navbarBrand">
+          <img id="title" src="Title1.png" alt="" style="height:30px; width:100px;" />
+        </a>
+      
+        
+        <form id="SearchForm" class="d-flex mx-auto" role="search" action="/search" method="GET">
+          <input type="text" name="q" required class="form-control" type="search" placeholder="Search" aria-label="Search"
+            style="background-color: white" id="searchInput" />
+          <button class="btn btn-outline-dark" type="submit" style="
+                    background-color: rgb(240, 240, 240);
+                    padding: 0px;
+                    width: 40px;
+                  " id="searchButton">
+            <img src="https://static.vecteezy.com/system/resources/previews/016/716/177/original/search-3d-icon-png.png"
+              style="
+                      object-fit: cover;
+                      width: 20px;
+                      height: 20px;
+                      margin: 0px;
+                      padding: 0px;
+                    " />
+          </button>
+        </form>
+      </div>
+    </nav>
+  
+    <nav class="navbar navbar-expand-lg" style="background-color:rgb(255, 209, 176)" id="navbar2">
+  
+  
+      <ul class="navbar-nav" style="display: flex; flex-direction: row; align-items: center;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home" style="color:Black">
+            <img src="Home.png" style="object-fit: contain; width: 30px; height: 30px;">
+          </a>
+        </li>
+      
+        <li class="nav-item" id="nav-cart">
+          <a class="nav-link active" aria-current="page" href="/cart" style="color: black; position: relative;">
+            <img src="cart.png" style="object-fit: contain; width:30px; height: 30px;">
+            <span class="cart-text">Cart</span>
+            <span id="cart-count" 
+      style="position: absolute; top: 0px; right: 0px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">
+</span>
+
+          </a>
+        </li>
+      
+        <li class="nav-item" id="nav-orders">
+          <a class="nav-link active" aria-current="page" href="/my-orders" style="color:black">
+            <img src="Order.png"
+            style="object-fit: contain; width: 30px; height: 30px;">
+            <span class="cart-text">Orders</span>
+          </a>
+        </li>
+      
+        <li class="nav-item" id="SearchIcon">
+          <a class="nav-link active" aria-current="page" href="/SearchProduct" style="color:black">
+            <img src="Search.png"
+            style="object-fit: contain; width: 30px; height: 30px;">
+          </a>
+        </li>
+       
+      </ul>
+      
+      <div class="d-flex justify-content-end" style="position: fixed; right: 0;">
+        <div class="dropdown">
+          <button class="d-flex align-items-center justify-content-center"
+          id="Log_Button" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false" 
+          style="background-color: white; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; padding: 0; border: none;">
+      <% if (username) { %>
+          <span style="font-size: 18px; font-weight: bold; color: black;">
+              <%= username.charAt(0).toUpperCase() %>
+          </span>
+      <% } else { %>
+          <img id="Log_Buttonimage"
+              src="https://static.vecteezy.com/system/resources/previews/000/550/731/original/user-icon-vector.jpg"
+              alt="User Icon"
+              style="width: 100%; height: 100%; object-fit: cover;" />
+      <% } %>
+  </button>
+          <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(226, 226, 226)">
+            <li class="nav-item" style="margin-top: 15px">
+              <a class="nav-link" href="/signup" style="
+                    color: black;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bolder;
+                  ">Signup</a>
+            </li>
+            <li class="nav-item" style="margin-top: 15px">
+              <a class="nav-link" href="/login" style="
+                    color: black;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bolder;
+                  ">Login</a>
+            </li>
+            <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+              <a class="nav-link" href="/logout" style="
+                    color: black;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bolder;
+                  ">Logout</a>
+            </li>
+            <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+              <a class="nav-link" href="/admin-Form" style="
+                    color: black;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bolder;
+                  ">Admin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+  
+    <div class="container-fluid p-2" id="CartContainer">
+      <div class="row m-0">
+        <% let hasValidProduct = false; %>
+    
+        <% cart.forEach(item => { %>
+          <% if (item.productId) { hasValidProduct = true; %>
+            <div class="col-12 p-0" id="CartCard">
+              <div class="card custom-card" 
+                   style="display: flex; align-items: center; gap: 15px; padding: 10px; background: white; border-radius: 8px; 
+                          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); width: 100%; flex-direction: row;">
+    
+                <!-- Product Image on Left -->
+                <img src="<%= item.productId.imageUrl %>" alt="<%= item.productId.title %>" 
+                     style="width: 90px; height: 90px; object-fit: contain; border-radius: 5px; flex-shrink: 0;" />
+    
+                <!-- Product Details on Right -->
+                <div class="card-body" 
+                     style="flex: 1; display: flex; flex-direction: column; align-items: flex-start; min-width: 0;">
+    
+                  <!-- Title with Wrapping -->
+                  <h5 class="card-title" 
+                  style="margin: 0; font-size: 14px; font-weight: bold; color: #333;
+                         white-space: normal; overflow-wrap: break-word; word-break: break-word;
+                         display: block; max-width: 100%;">
+                <a href="/product/<%= item.productId._id %>" 
+                   style="text-decoration: none; font-family: Arial, Helvetica, sans-serif; color: #333;">
+                  <%= item.productId.title %>
+                </a>
+              </h5>
+              
+    
+                  <h5 class="card-price" 
+                      style="font-family: Arial, Helvetica, sans-serif; font-weight: bolder; font-size: 16px; color: #e60000; margin: 5px 0;">
+                    ₹<%= item.productId.price %>
+                  </h5>
+    
+                  <form action="/cart/remove" method="POST" style="margin-top: 10px;">
+                    <input type="hidden" name="productId" value="<%= item.productId._id %>">
+                    <button id="remove" type="submit" 
+                            style="font-size: 14px; padding: 6px 16px; background: #d9534f; color: white; border: none; 
+                                   border-radius: 5px; cursor: pointer;">
+                      Remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% }); %>
+    
+        <% if (!hasValidProduct) { %>
+          <p class="text-center">No items in the cart.</p>
+        <% } %>
+      </div>
+    </div>
+    
+    <!-- Inline Media Query for Small Screens -->
+    <style>
+      @media (max-width: 450px) {
+       
+        .custom-card {
+          flex-direction: row !important; /* Ensure image stays left */
+          align-items: center !important;
+          padding: 8px !important;
+          gap: 10px !important;
+        }
+    
+        .card-img-left {
+          width: 70px !important;
+          height: 70px !important;
+          object-fit: contain !important;
+        }
+    
+        .card-title {
+  font-size: 12px !important;
+  white-space: normal !important;  /* Allows text to wrap normally */
+  overflow-wrap: break-word !important; /* Moves words to next line when needed */
+  word-break: break-word !important; /* Ensures words don't break randomly */
+  max-width: 100% !important;
+  display: block !important; /* Helps in enforcing wrapping */
+}
+
+    
+        .card-price {
+          font-size: 14px !important;
+        }
+    
+        #remove {
+          font-size: 12px !important;
+          padding: 5px 12px !important;
+        }
+      }
+    </style>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        fetch('/cart/count')
+          .then(res => res.json())
+          .then(data => {
+            updateCartBadge(data.totalItems || 0);
+          })
+          .catch(err => {
+            console.error('Error fetching cart count:', err);
+          });
+      });
+    
+      function updateCartBadge(count) {
+        const cartCountElem = document.getElementById('cart-count');
+        if (!cartCountElem) return; // safety check
+    
+        if (count > 0) {
+          cartCountElem.textContent = count;
+          cartCountElem.style.display = 'inline';
+        } else {
+          cartCountElem.style.display = 'none';
+        }
+      }
+    </script>
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+<script src="app.js"></script>
+<script src="custom.js"></script>
+<script src="effects.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="google-signin.js"></script>
+<script src="facebook-signin.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+
+  
+</html>

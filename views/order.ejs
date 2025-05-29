@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trendify</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/Order.css" />
+
+    <link rel="icon" href="E-Commerce-logo.jpeg" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body style="background-color: seashell">
+    <!-- Navbar 1 -->
+  <nav class="navbar navbar-expand-lg" id="navbar1" style=" background-color:rgb(209, 168, 123);
+  ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color: white" id="navbarBrand">
+          <img id="title" src="Title1.png" alt="" style="height:30px; width:100px;" />
+        </a>
+      
+        
+        <form id="SearchForm" class="d-flex mx-auto" role="search" action="/search" method="GET">
+          <input type="text" name="q" required class="form-control" type="search" placeholder="Search" aria-label="Search"
+            style="background-color: white" id="searchInput" />
+          <button class="btn btn-outline-dark" type="submit" style="
+                    background-color: rgb(240, 240, 240);
+                    padding: 0px;
+                    width: 40px;
+                  " id="searchButton">
+            <img src="https://static.vecteezy.com/system/resources/previews/016/716/177/original/search-3d-icon-png.png"
+              style="
+                      object-fit: cover;
+                      width: 20px;
+                      height: 20px;
+                      margin: 0px;
+                      padding: 0px;
+                    " />
+          </button>
+        </form>
+      </div>
+    </nav>
+  
+    <nav class="navbar navbar-expand-lg" style="background-color:rgb(255, 209, 176)" id="navbar2">
+  
+  
+      <ul class="navbar-nav" style="display: flex; flex-direction: row; align-items: center;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home" style="color:Black">
+            <img src="Home.png" style="object-fit: contain; width: 30px; height: 30px;">
+          </a>
+        </li>
+      
+        <li class="nav-item" id="nav-cart">
+          <a class="nav-link active" aria-current="page" href="/cart" style="color: black; position: relative;">
+            <img src="cart.png" style="object-fit: contain; width:30px; height: 30px;">
+            <span class="cart-text">Cart</span>
+            <span id="cart-count" 
+      style="position: absolute; top: 0px; right: 0px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">
+</span>
+
+          </a>
+        </li>
+      
+        <li class="nav-item" id="nav-orders">
+          <a class="nav-link active" aria-current="page" href="/my-orders" style="color:black">
+            <img src="Order.png"
+            style="object-fit: contain; width: 30px; height: 30px;">
+            <span class="cart-text">Orders</span>
+          </a>
+        </li>
+      
+        <li class="nav-item" id="SearchIcon">
+          <a class="nav-link active" aria-current="page" href="/SearchProduct" style="color:black">
+            <img src="Search.png"
+            style="object-fit: contain; width: 30px; height: 30px;">
+          </a>
+        </li>
+       
+      </ul>
+      
+    </nav>
+    
+    <div class="container">
+      <div class="order-container text-center d-flex flex-column flex-md-row align-items-center justify-content-center">
+          <!-- Product Image on Left (For larger screens) -->
+          <div class="product-image-container text-center mb-3 mb-md-0">
+              <img src="<%= product.imageUrl %>" alt="Product Image" class="product-img">
+          </div>
+          
+          <!-- Order Details on Right -->
+          <div class="order-details text-center text-md-start p-4">
+              <h2>Confirm Your Order</h2>
+  
+              <!-- Product Details -->
+              <h4><%= product.title %></h4>
+              <h5 class="mt-3">ProductPrice: ₹<span id="ProductPrice"><%= product.price %></span></h5>
+              <p>Selected Size: <%= selectedSize %></p>
+              <!-- Number of Items -->
+               
+              <p class="text-muted">Number of items to pay: <span id="num_items">1</span></p>
+              <% if (selectedColor) { %>
+                <div class="selected-color-preview" style="margin-top: 20px;">
+                  <p><strong>Selected Color:</strong></p>
+                  <img 
+                    src="<%= selectedColor %>" 
+                    alt="Selected color" 
+                    style="width: 100px; height: auto; border: 2px solid #ccc; border-radius: 5px;"
+                  />
+                </div>
+              <% } %>
+              <!-- Quantity Selector -->
+              <div class="d-flex justify-content-center justify-content-md-start align-items-center mt-3">
+                  <button class="btn btn-outline-secondary" onclick="changeQuantity(-1)">-</button>
+                  <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control mx-2 quantity-input" onchange="calculateTotal()">
+                  <button class="btn btn-outline-secondary" onclick="changeQuantity(1)">+</button>
+              </div>
+  
+              <!-- Total Price -->
+              <h5 class="mt-3">Total Price: ₹<span id="total_price"><%= product.price %></span></h5>
+  
+              <!-- Proceed Button -->
+              <a href="#" id="proceedBtn" class="btn btn-success btn-lg proceed-btn mt-3" onclick="updateProceedLink()">Proceed to Checkout</a>
+          </div>
+      </div>
+  </div>
+  <div style="height:200px"></div>
+  <script>
+      let productPrice = parseInt(document.getElementById("ProductPrice").innerText);
+
+      let quantityInput = document.getElementById("quantity");
+      let totalPriceElement = document.getElementById("total_price");
+      let numItemsElement = document.getElementById("num_items");
+      let proceedBtn = document.getElementById("proceedBtn");
+  
+      function changeQuantity(amount) {
+          let newQuantity = parseInt(quantityInput.value) + amount;
+          if (newQuantity < 1) newQuantity = 1;
+          quantityInput.value = newQuantity;
+          calculateTotal();
+      }
+  
+      function calculateTotal() {
+          let quantity = parseInt(quantityInput.value);
+          let totalPrice = productPrice * quantity;
+          totalPriceElement.innerText = totalPrice;
+          numItemsElement.innerText = quantity; // Update number of items display
+          
+          // Update Proceed Button Link with selected quantity
+          proceedBtn.href = `/place-order?product_id=<%= product._id %>&quantity=` + quantity;
+      }
+
+      function updateProceedLink() {
+        let quantity = document.getElementById("quantity").value;
+        let productId = "<%= product._id %>"; // Keep product ID from server-side rendering
+        let selectedSize = "<%= selectedSize %>"; // Use the selected size passed from server-side
+        let selectedColor = "<%= selectedColor %>"; // Use the selected color passed from server-side
+        let proceedBtn = document.getElementById("proceedBtn");
+        proceedBtn.href = `/enter-address?product_id=${productId}&size=${selectedSize}&color=${selectedColor}&quantity=${quantity}`;
+    }
+
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/cart/count')
+        .then(res => res.json())
+        .then(data => {
+          updateCartBadge(data.totalItems || 0);
+        })
+        .catch(err => {
+          console.error('Error fetching cart count:', err);
+        });
+    });
+  
+    function updateCartBadge(count) {
+      const cartCountElem = document.getElementById('cart-count');
+      if (!cartCountElem) return; // safety check
+  
+      if (count > 0) {
+        cartCountElem.textContent = count;
+        cartCountElem.style.display = 'inline';
+      } else {
+        cartCountElem.style.display = 'none';
+      }
+    }
+  </script>
+ 
+    
+  
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+    <script src="effects.js"></script>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="google-signin.js"></script>
+    <script src="facebook-signin.js"></script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+  </body>
+</html>

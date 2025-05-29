@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trendify</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="icon" href="E-Commerce-logo.jpeg" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* General Styling */
+      body {
+        background: linear-gradient(to right, #ffccbc, #ed8a6b, #b0d45c);
+        font-family: "Poppins", sans-serif;
+
+        text-align: center;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgb(209, 168, 123);
+        padding: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .navbar-brand img {
+        height: 40px;
+      }
+      .nav-link {
+        color: black !important;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .nav-link:hover {
+        color: #f8d210 !important;
+        transform: scale(1.1);
+      }
+      .logout-btn {
+        background-color: rgb(255, 69, 69);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        color: black;
+        transition: 0.3s;
+      }
+      .logout-btn:hover {
+        background-color: rgb(220, 50, 50);
+        transform: scale(1.05);
+      }
+
+      /* Form Container */
+      .form-container {
+        max-width: 500px;
+        height: 1500px;
+        margin: 50px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      /* Input Fields */
+      .form-control {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        padding: 12px;
+        color: black;
+        border-radius: 6px;
+      }
+      .form-control:focus {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
+      }
+
+      /* Submit Button */
+      .submit-btn {
+        width: 100%;
+        background-color: #f8d210;
+        color: black;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .submit-btn:hover {
+        background-color: #f0b914;
+        transform: scale(1.05);
+      }
+
+      /* Footer */
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-container {
+          width: 90%;
+          padding: 20px;
+        }
+        .submit-btn {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img
+            src="Title1.png"
+            alt="Trendify Logo"
+            style="height: 50px; width: 100px"
+          />
+        </a>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/orders"
+              ><i class="fas fa-box"></i> Orders</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="btn logout-btn" href="/home"
+              ><i class="fas fa-sign-out-alt"></i> Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+   <!-- Admin Form -->
+<div class="form-container" style="height: auto;">
+  <h2 class="mb-3 text-center" style="color: black; font-weight: bolder">Add Product</h2>
+  <form action="/add-product" method="POST">
+    <!-- Category Dropdown -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" name="category" class="form-control" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="fashion">Fashion</option>
+        <option value="electronics">Electronics</option>
+        <option value="home">Home</option>
+        <option value="beauty">Beauty</option>
+        <option value="sports">Sports</option>
+        <option value="books">Books</option>
+        <option value="others">Others</option>
+      </select>
+    </div>
+
+    <!-- Product Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Product Title</label>
+      <input type="text" id="title" name="title" class="form-control" placeholder="Enter product title" required />
+    </div>
+
+    <!-- Product Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" name="description" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+    </div>
+
+    <!-- Image URLs -->
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">Main Image URL</label>
+      <input type="text" id="imageUrl" name="imageUrl" class="form-control" placeholder="Enter main image URL" required />
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl2" class="form-label">Additional Image URL 1</label>
+      <input type="text" id="imageUrl2" name="imageUrl2" class="form-control" placeholder="Optional" />
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl3" class="form-label">Additional Image URL 2</label>
+      <input type="text" id="imageUrl3" name="imageUrl3" class="form-control" placeholder="Optional" />
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl4" class="form-label">Additional Image URL 3</label>
+      <input type="text" id="imageUrl4" name="imageUrl4" class="form-control" placeholder="Optional" />
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Price (₹)</label>
+      <input type="number" id="price" name="price" class="form-control" placeholder="Enter product price" required />
+    </div>
+
+    <!-- Stock -->
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="number" id="stock" name="stock" class="form-control" placeholder="Enter stock quantity" required />
+    </div>
+
+    <!-- Product Colors Section -->
+    <div class="mb-3">
+      <label class="form-label" style="font-weight: bold;">Product Color Variants</label>
+    </div>
+    <div id="color-container">
+      <div class="color-input-group">
+        <input type="text" name="colorImages[0]" class="form-control mb-2" placeholder="Color Variant 1 Image URL" />
+      </div>
+    </div>
+    <button type="button" id="add-color" class="btn btn-secondary mt-2">Add More Color Variants</button>
+    <br>
+    <hr>
+    <!-- Product Sizes Section -->
+    <div class="mb-3">
+      <label class="form-label" style="font-weight: bold;">Product Sizes & Stock</label>
+      <div id="size-container">
+        <div class="size-input-group">
+          <input type="text" name="sizes[0][size]" class="form-control mb-2" placeholder="Size (e.g., S, M, L)" required />
+          <input type="number" name="sizes[0][stock]" class="form-control mb-2" placeholder="Stock" required />
+        </div>
+      </div>
+      <button type="button" id="add-size" class="btn btn-secondary mt-2">Add More Sizes</button>
+      <hr>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary w-100" style="font-weight: bold;">Add Product</button>
+  </form>
+</div>
+
+<script>
+  // Script to dynamically add more size inputs
+  document.getElementById('add-size').addEventListener('click', () => {
+    const sizeContainer = document.getElementById('size-container');
+    const sizeGroupCount = sizeContainer.getElementsByClassName('size-input-group').length;
+    
+    // Create new input group for size and stock
+    const newSizeGroup = document.createElement('div');
+    newSizeGroup.classList.add('size-input-group');
+
+    newSizeGroup.innerHTML = `
+      <input type="text" name="sizes[${sizeGroupCount}][size]" class="form-control mb-2" placeholder="Size (e.g., S, M, L)" required />
+      <input type="number" name="sizes[${sizeGroupCount}][stock]" class="form-control mb-2" placeholder="Stock" required />
+    `;
+
+    sizeContainer.appendChild(newSizeGroup);
+  });
+</script>
+<script>
+  // Script to dynamically add more color variant inputs
+  document.getElementById('add-color').addEventListener('click', () => {
+    const colorContainer = document.getElementById('color-container');
+    const colorGroupCount = colorContainer.getElementsByClassName('color-input-group').length;
+
+    // Create new input group for color image URL
+    const newColorGroup = document.createElement('div');
+    newColorGroup.classList.add('color-input-group');
+
+    newColorGroup.innerHTML = `
+      <input type="text" name="colorImages[${colorGroupCount}]" class="form-control mb-2" placeholder="Color Variant ${colorGroupCount + 1} Image URL" />
+    `;
+
+    colorContainer.appendChild(newColorGroup);
+  });
+</script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+    <script src="custom.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="google-signin.js"></script>
+    <script src="facebook-signin.js"></script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

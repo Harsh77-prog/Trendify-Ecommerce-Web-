@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendify</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/effects.css" />
+  <link rel="stylesheet" href="/styles/price.css" />
+  <link rel="icon" href="E-Commerce-logo.jpeg" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar 1 -->
+  <nav class="navbar navbar-expand-lg" id="navbar1" style="background-color: rgb(209, 168, 123)">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="color: white" id="navbarBrand">
+        <img id="title" src="Title1.png" alt="" style="height:30px; width:100px;" />
+      </a>
+    
+      
+      <form id="SearchForm" class="d-flex mx-auto" role="search" action="/search" method="GET">
+        <input type="text" name="q" required class="form-control" type="search" placeholder="Search" aria-label="Search"
+          style="background-color: white" id="searchInput" />
+        <button class="btn btn-outline-dark" type="submit" style="
+                  background-color: rgb(240, 240, 240);
+                  padding: 0px;
+                  width: 40px;
+                " id="searchButton">
+          <img src="https://static.vecteezy.com/system/resources/previews/016/716/177/original/search-3d-icon-png.png"
+            style="
+                    object-fit: cover;
+                    width: 20px;
+                    height: 20px;
+                    margin: 0px;
+                    padding: 0px;
+                  " />
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg"  id="navbar2" style="background-color: rgb(255, 209, 176)">
+
+
+    <ul class="navbar-nav" style="display: flex; flex-direction: row; align-items: center;">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/home" style="color:Black">
+          <img src="Home.png" style="object-fit: contain; width: 30px; height: 30px;">
+        </a>
+      </li>
+    
+      <li class="nav-item" id="nav-cart">
+        <a class="nav-link active" aria-current="page" href="/cart" style="color: black; position: relative;">
+          <img src="cart.png" style="object-fit: contain; width:30px; height: 30px;">
+          <span class="cart-text">Cart</span>
+          <span id="cart-count" 
+    style="position: absolute; top: 0px; right: 0px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">
+</span>
+
+        </a>
+      </li>
+    
+      <li class="nav-item" id="nav-orders">
+        <a class="nav-link active" aria-current="page" href="/my-orders" style="color:black">
+          <img src="Order.png"
+          style="object-fit: contain; width: 30px; height: 30px;">
+          <span class="cart-text">Orders</span>
+        </a>
+      </li>
+    
+      <li class="nav-item" id="SearchIcon">
+        <a class="nav-link active" aria-current="page" href="/SearchProduct" style="color:black">
+          <img src="Search.png"
+          style="object-fit: contain; width: 30px; height: 30px;">
+        </a>
+      </li>
+     
+    </ul>
+    
+    <div class="d-flex justify-content-end" style="position: fixed; right: 0;">
+      <div class="dropdown">
+        <button class="d-flex align-items-center justify-content-center"
+        id="Log_Button" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false" 
+        style="background-color: white; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; padding: 0; border: none;">
+    <% if (username) { %>
+        <span style="font-size: 18px; font-weight: bold; color: black;">
+            <%= username.charAt(0).toUpperCase() %>
+        </span>
+    <% } else { %>
+        <img id="Log_Buttonimage"
+            src="https://static.vecteezy.com/system/resources/previews/000/550/731/original/user-icon-vector.jpg"
+            alt="User Icon"
+            style="width: 100%; height: 100%; object-fit: cover;" />
+    <% } %>
+</button>
+
+        <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(226, 226, 226)">
+          <li class="nav-item" style="margin-top: 15px">
+            <a class="nav-link" href="/signup" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Signup</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px">
+            <a class="nav-link" href="/login" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Login</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+            <a class="nav-link" href="/logout" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Logout</a>
+          </li>
+          <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+            <a class="nav-link" href="/admin-Form" style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bolder;
+                ">Admin</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Other content goes here -->
+  <div style="background-color: white" id="extra">
+    <div class="container">
+      <div class="row">
+        <!-- Images and content -->
+      </div>
+    </div>
+  </div>
+ 
+  <div id="main-div" style="
+        background-image: url(https://images-eu.ssl-images-amazon.com/images/G/31/OHL/24/BAU/feb/PC_hero_1_2x_1._CB582889946_.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-bottom: 20px;
+      ">
+    <div class="container">
+      <div class="container">
+        <div class="row" id="main-row-smaller-Img">
+          <!-- First Image -->
+          <div class="col-6 mb-3">
+            <div class="rounded">
+              <video autoplay muted loop controls class="img-fluid"  id="img123" style="height:100% ; width: 100%;">
+                <source src="Trendify.mp4" type="video/mp4">
+              
+              </video>
+               
+            </div>
+          </div>
+          
+          
+          <!-- Smaller Grid of Four Images -->
+          <div class="col-6 mb-3" id="smaller-grid">
+            <div class="container my-4" style="margin-top: 400px">
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <div class="rounded">
+                    <img src="https://m.media-amazon.com/images/I/41jcYNdQFML._AC_SY175_.jpg" alt="" class="img-fluid"
+                      id="imgSM" />
+                  </div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="rounded">
+                    <img src="https://m.media-amazon.com/images/I/71-idQ966EL._SX522_.jpg" alt=""
+                      class="img-fluid small3 " id="imgSM" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <div class="rounded">
+                    <img
+                      src="https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/Appliances-QC-PC-186x116--B07G5J5FYP._SY116_CB667322346_.jpg"
+                      alt="" class="img-fluid " id="imgSM" />
+                  </div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="rounded">
+                    <img
+                      src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/PB/March/Bikram/PC_QC_HOME_SIZE_186_3._SY116_CB567468236_.jpg"
+                      alt="" class="img-fluid small3" id="imgSM" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="prev-btn">&#8249;</button>
+    <button id="next-btn">&#8250;</button>
+  </div>
+  <div class="container-fluid text-center"  
+     style="background-color: seashell; padding: 20px 0; margin: 0;">
+
+  <div class="banner-wrapper">
+    <div class="banner-track">
+      <div class="banner-text">⚡ Shop the Latest Trends Only on Trendify ⚡</div>
+      <div class="banner-text">✨ Unbeatable Deals Await You at Trendify ✨</div>
+      <div class="banner-text">🔥 Hot Picks That Everyone's Talking About 🔥</div>
+      <div class="banner-text">🎯 Perfect Products. Perfect Prices. Only at Trendify 🎯</div>
+      <div class="banner-text">🌟 Trendify – Where Style Meets Savings 🌟</div>
+    </div>
+  </div>
+  <br>
+</div>
+
+  <div class="container-fluid text-light text-center py-1" style="background-color: seashell;">
+    <h6 style="text-align: end">
+      <a href="/all-products" id="IndexExplore" style="margin-right: 30px;">Explore All</a>
+    </h6>
+
+    <div class="container my-1" id="ScreenMargin">
+      <div class="row flex-row flex-nowrap scrollable-container custom-row">
+          <% if (products && products.length > 0) { 
+              let fashionProducts = products.filter(product => product.category.toLowerCase() === "fashion"); // Ensure lowercase check
+  
+              if (fashionProducts.length > 0) { 
+                  // Shuffle the fashion products
+                  fashionProducts = fashionProducts.sort(() => Math.random() - 0.5);
+  
+                  fashionProducts.forEach(product => { %>
+                      <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3 g-0" id="card">
+                          <div class="card custom-card responsive-card" style="height: 100%">
+                            <a href="/product/<%= product._id %>" >
+                              <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
+                            </a>
+                              <div class="card-body d-flex flex-column" id="scrollBody" >
+                                  <!-- Title limited to 1 line -->
+                                  <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
+                                      <%= product.title %>
+                                    </a>
+                                  </h5>
+                                  <!-- Description limited to 2 lines -->
+                                  <div class="deal-card" data-price="<%= product.price %>" >
+                                    <span class="deal-tag">Limited time deal</span>
+                                    <div class="price-container">
+                                      <span  class="discount discount-percentage"></span>
+                                      <span  class="final-price"></span>
+                                      <span  class="original-price"></span>
+                                    </div>
+                                  </div>
+                                  
+                  
+                                  <% if (product.reviews.length > 0) { %>
+                                    <% 
+                                      // Find the best review (highest rating)
+                                      let bestReview = product.reviews.reduce((best, review) => 
+                                        review.rating > best.rating ? review : best, product.reviews[0]
+                                      );
+                                    %>
+                                  
+                                    
+                                     
+                                      
+                                      <!-- Display only stars -->
+                                      <p id="indexrating">
+                                        <strong>Rating:</strong> 
+                                        <% for (let i = 1; i <= 5; i++) { %>
+                                          <% if (i <= bestReview.rating) { %>
+                                            <i class="fas fa-star" style="color: gold;"></i> <!-- Filled star -->
+                                          <% } else { %>
+                                            <i class="far fa-star" style="color: lightgray;"></i> <!-- Empty star -->
+                                          <% } %>
+                                        <% } %>
+                                      </p>
+                                  
+                                    
+                                    
+                                  
+                                   
+                                  <% } else { %>
+                                    <p>No reviews yet</p>
+                                  <% } %>
+                                  
+                                  <p></p> 
+                              </div>
+                          </div>
+                      </div>
+                  <% }) %>
+              <% } else { %>
+                  <div class="col-12 text-center">
+                      <p class="text-muted">No fashion products available.</p>
+                  </div>
+              <% } %>
+          <% } else { %>
+              <div class="col-12 text-center">
+                  <p class="text-muted">No products available.</p>
+              </div>
+          <% } %>
+      </div>
+  </div>
+  
+  
+  
+  </div>
+
+  <div class="container-fluid text-light text-center py-3" style="background-color: seashell;">
+    <h6 style="text-align: end">
+      <a href="/all-products" id="IndexExplore" style="margin-right: 30px;">Explore All </a>
+    </h6>
+
+    
+    <div class="container my-1" id="ScreenMargin">
+      <div class="row flex-row flex-nowrap scrollable-container custom-row">
+          <% if (products && products.length > 0) { 
+              let electronicsProducts = products.filter(product => product.category.toLowerCase() === "electronics" || product.category.toLowerCase() === "electrical");
+  
+              if (electronicsProducts.length > 0) { 
+                  // Shuffle the electrical & electronics products
+                  electronicsProducts = electronicsProducts.sort(() => Math.random() - 0.5);
+  
+                  electronicsProducts.forEach(product => { %>
+                      <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3 g-0" id="card">
+                          <div class="card custom-card responsive-card" style="height: 100%">
+                            <a href="/product/<%= product._id %>">
+                              <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
+                            </a>
+                              <div class="card-body d-flex flex-column" id="scrollBody">
+                                  <!-- Title limited to 1 line -->
+                                  <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
+                                      <%= product.title %>
+                                    </a>
+                                  </h5>
+                                  <!-- Description limited to 2 lines -->
+                                  <div class="deal-card" data-price="<%= product.price %>">
+                                    <span class="deal-tag">Limited time deal</span>
+                                    <div class="price-container">
+                                      <span  class="discount discount-percentage"></span>
+                                      <span  class="final-price"></span>
+                                      <span  class="original-price"></span>
+                                    </div>
+                                  </div>
+                                  
+                  
+                                  <% if (product.reviews.length > 0) { %>
+                                    <% 
+                                      // Find the best review (highest rating)
+                                      let bestReview = product.reviews.reduce((best, review) => 
+                                        review.rating > best.rating ? review : best, product.reviews[0]
+                                      );
+                                    %>
+                                  
+                                    
+                                     
+                                      
+                                      <!-- Display only stars -->
+                                      <p id="indexrating">
+                                        <strong>Rating:</strong> 
+                                        <% for (let i = 1; i <= 5; i++) { %>
+                                          <% if (i <= bestReview.rating) { %>
+                                            <i class="fas fa-star" style="color: gold;"></i> <!-- Filled star -->
+                                          <% } else { %>
+                                            <i class="far fa-star" style="color: lightgray;"></i> <!-- Empty star -->
+                                          <% } %>
+                                        <% } %>
+                                      </p>
+                                  
+                                    
+                                    
+                                  
+                                   
+                                  <% } else { %>
+                                    <p>No reviews yet</p>
+                                  <% } %>
+                                  
+                                  <p></p> 
+                              </div>
+                          </div>
+                      </div>
+                  <% }) %>
+              <% } else { %>
+                  <div class="col-12 text-center">
+                      <p class="text-muted">No electrical or electronics products available.</p>
+                  </div>
+              <% } %>
+          <% } else { %>
+              <div class="col-12 text-center">
+                  <p class="text-muted">No products available.</p>
+              </div>
+          <% } %>
+      </div>
+  </div>
+  
+  </div>
+
+  <div style="width:100; height: 20px; background-color: rgb(155, 155, 155);">
+  </div>
+  <div class="container-fluid text-center" 
+     style="background-color: seashell; padding: 20px 0; margin: 0;">
+
+     <div class="banner-wrapper">
+      <div class="banner-track">
+        <div class="banner-text">⚡ Customers' Most-Loved Products for You ⚡</div>
+        <div class="banner-text">⚡ Customers' Most-Loved Products for You ⚡</div>
+        <div class="banner-text">⚡ Customers' Most-Loved Products for You ⚡</div>
+        <div class="banner-text">⚡ Customers' Most-Loved Products for You ⚡</div>
+        <div class="banner-text">⚡ Customers' Most-Loved Products for You ⚡</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    
+
+   <!-- 🌫️ Glassmorphism Container -->
+<div style="padding:5px; margin: 20px auto;margin-top: 0px; max-width: 1400px; border-radius: 20px;
+background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+
+  <!-- 🔳 Product Cards Container -->
+  <div id="productCardsContainer" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+    <% const visibleCount=10; // Show 10 cards × 4 products=40 %>
+      <% for (let i=0; i < visibleCount * 4 && i < products.length; i +=4) { %>
+        <div class="ProductWidth" style="width: 100%; text-align: center; background: white; padding: 15px;
+      border-radius: 10px; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);">
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <% for (let j=i; j < i + 4 && j < products.length; j++) { %>
+              <div style="text-align: center;">
+                <a href="/product/<%= products[j]._id %>" style="text-decoration: none; color: inherit;">
+                  <img src="<%= products[j].imageUrl %>" alt="<%= products[j].title %>"
+                    style="width: 100%; max-height: 100px; object-fit: contain; border-radius: 5px;" />
+                </a>
+
+                <h6 style="font-size: 12px; font-weight: bold; color: #333; margin-top: 5px; white-space: normal;">
+                  <a href="/product/<%= products[j]._id %>" style="text-decoration: none; color: inherit;">
+                    <%= products[j].title.split(" ").slice(0, 3).join(" ") %>
+</a>
+</h6>
+<div class="deal-card" data-price="<%= products[j].price %>" >
+                                    
+                                    <div class="price-container">
+                                      <span style="font-size: 10px;" class="discount discount-percentage"></span>
+                                      <span style="font-size: 10px;" class="final-price"></span>
+                                      <span style="font-size: 10px;" class="original-price"></span>
+                                    </div>
+                                  </div>
+    
+   
+  </h6>
+  <% if (products[j].reviews.length > 0) { %>
+                                    <% 
+                                      // Find the best review (highest rating)
+                                      let bestReview = products[j].reviews.reduce((best, review) => 
+                                        review.rating > best.rating ? review : best, products[j].reviews[0]
+                                      );
+                                    %>
+                                  
+                                    
+                                     
+                                      
+                                      <!-- Display only stars -->
+                                      <p id=" indexrating" style="font-size: 10px; margin: 4px 0; line-height: 1;">
+                      <strong style="font-size: 10px;">Rating:</strong>
+                      <% for (let i=1; i <=5; i++) { %>
+                        <% if (i <=bestReview.rating) { %>
+                          <i class="fas fa-star" style="color: gold; font-size: 10px; margin-right: 1px;"></i>
+                          <% } else { %>
+                            <i class="far fa-star" style="color: lightgray; font-size: 10px; margin-right: 1px;"></i>
+                            <% } %>
+                              <% } %>
+                                </p>
+
+                                <% } else { %>
+                                  <p style="font-size: 10px;">No reviews yet</p>
+                                  <% } %>
+              </div>
+              <% } %>
+          </div>
+          <a href="/all-products"
+            style="display: block; margin-top: 15px; font-size: 14px; font-weight: bold; color: #007BFF; text-decoration: none;">Explore
+            all</a>
+        </div>
+        <% } %>
+  </div>
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="showMoreBtn">
+      <span>Show More</span>
+    </button>
+
+
+  </div>
+
+</div>
+
+<!-- 🔘 Show More Button -->
+
+
+  <div class="container-fluid text-light text-center py-3" style="background-color: seashell;">
+    <h6 style="text-align: end">
+        <a href="/all-products" id="IndexExplore" style="margin-right: 30px;">Explore All</a>
+    </h6>
+    <div class="container my-1" id="ScreenMargin">
+      <div class="row flex-row flex-nowrap scrollable-container custom-row">
+          <% if (products && products.length > 0) { 
+              let beautyProducts = products.filter(product => product.category.toLowerCase() === "beauty"); // Ensure lowercase check
+  
+              if (beautyProducts.length > 0) { 
+                  // Shuffle the beauty products
+                  beautyProducts = beautyProducts.sort(() => Math.random() - 0.5);
+  
+                  beautyProducts.forEach(product => { %>
+                      <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3 g-0" id="card">
+                          <div class="card custom-card responsive-card" style="height: 100%">
+                            <a href="/product/<%= product._id %>" >
+                              <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
+                              </a>
+                              <div class="card-body d-flex flex-column" id="scrollBody">
+                                  <!-- Title limited to 1 line -->
+                                  <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
+                                      <%= product.title %>
+                                    </a>
+                                  </h5>
+                                  <!-- Description limited to 2 lines -->
+                                  <div class="deal-card" data-price="<%= product.price %>" >
+                                    <span class="deal-tag">Limited time deal</span>
+                                    <div class="price-container">
+                                      <span class="discount discount-percentage"></span>
+                                      <span class="final-price"></span>
+                                      <span class="original-price"></span>
+                                    </div>
+                                  </div>
+                                  
+                  
+                                  <% if (product.reviews.length > 0) { %>
+                                    <% 
+                                      // Find the best review (highest rating)
+                                      let bestReview = product.reviews.reduce((best, review) => 
+                                        review.rating > best.rating ? review : best, product.reviews[0]
+                                      );
+                                    %>
+                                  
+                                    
+                                     
+                                      
+                                      <!-- Display only stars -->
+                                      <p id="indexrating">
+                                        <strong>Rating:</strong> 
+                                        <% for (let i = 1; i <= 5; i++) { %>
+                                          <% if (i <= bestReview.rating) { %>
+                                            <i class="fas fa-star" style="color: gold;"></i> <!-- Filled star -->
+                                          <% } else { %>
+                                            <i class="far fa-star" style="color: lightgray;"></i> <!-- Empty star -->
+                                          <% } %>
+                                        <% } %>
+                                      </p>
+                                  
+                                    
+                                    
+                                  
+                                   
+                                  <% } else { %>
+                                    <p>No reviews yet</p>
+                                  <% } %>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  <% }) %>
+              <% } else { %>
+                  <div class="col-12 text-center">
+                      <p class="text-muted">No beauty products available.</p>
+                  </div>
+              <% } %>
+          <% } else { %>
+              <div class="col-12 text-center">
+                  <p class="text-muted">No products available.</p>
+              </div>
+          <% } %>
+      </div>
+  </div>
+  
+   
+  </div>
+  
+
+
+  
+ 
+  
+  <div style="width:100; height: 20px; background-color: rgb(155, 155, 155);">
+  </div>
+  
+
+
+
+  <div class="container-fluid text-light text-center py-3" style="background-color: seashell;">
+    <h6 style="text-align: end">
+      <a href="/all-products" id="IndexExplore" style="margin-right: 30px;">Explore All </a>
+    </h6>
+    <div class="container my-1" id="ScreenMargin">
+      <div class="row flex-row flex-nowrap scrollable-container custom-row">
+          <% if (products && products.length > 0) { 
+              let filteredProducts = products.filter(product => {
+                  let category = product.category ? product.category.toLowerCase() : "";
+                  return category === "sports" || category === "books";
+              });
+  
+              if (filteredProducts.length > 0) { 
+                  // Shuffle the sports & books products
+                  filteredProducts = filteredProducts.sort(() => Math.random() - 0.5);
+  
+                  filteredProducts.forEach(product => { %>
+                      <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3 g-0" id="card">
+                          <div class="card custom-card responsive-card" style="height: 100%;">
+                            <a href="/product/<%= product._id %>" >
+                              <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" loading="lazy"/>
+                            </a>
+                              <div class="card-body d-flex flex-column" id="scrollBody">
+                                  <!-- Title limited to 1 line -->
+        
+                                  <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
+                                      <%= product.title %>
+                                    </a>
+                                  </h5>
+                                  <!-- Description limited to 2 lines -->
+                                  <div class="deal-card" data-price="<%= product.price %>" >
+                                    <span class="deal-tag">Limited time deal</span>
+                                    <div class="price-container">
+                                      <span  class="discount discount-percentage"></span>
+                                      <span  class="final-price"></span>
+                                      <span  class="original-price"></span>
+                                    </div>
+                                  </div>
+                                  
+                  
+                                  <% if (product.reviews.length > 0) { %>
+                                    <% 
+                                      // Find the best review (highest rating)
+                                      let bestReview = product.reviews.reduce((best, review) => 
+                                        review.rating > best.rating ? review : best, product.reviews[0]
+                                      );
+                                    %>
+                                  
+                                    
+                                     
+                                      
+                                      <!-- Display only stars -->
+                                      <p>
+                                        <strong>Rating:</strong> 
+                                        <% for (let i = 1; i <= 5; i++) { %>
+                                          <% if (i <= bestReview.rating) { %>
+                                            <i class="fas fa-star" style="color: gold;"></i> <!-- Filled star -->
+                                          <% } else { %>
+                                            <i class="far fa-star" style="color: lightgray;"></i> <!-- Empty star -->
+                                          <% } %>
+                                        <% } %>
+                                      </p>
+                                  
+                                    
+                                    
+                                  
+                                   
+                                  <% } else { %>
+                                    <p>No reviews yet</p>
+                                  <% } %>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  <% }) %>
+              <% } else { %>
+                  <div class="col-12 text-center">
+                      <p class="text-muted">No sports or books products available.</p>
+                  </div>
+              <% } %>
+          <% } else { %>
+              <div class="col-12 text-center">
+                  <p class="text-muted">No products available.</p>
+              </div>
+          <% } %>
+      </div>
+  </div>
+  
+    
+  </div>
+  
+  <div class="ABC" style="
+        width:100%;
+        height: 30px;
+        background-color: rgb(255, 209, 176);
+      
+      "></div>
+ <div class="about-section" 
+ style="background-color: seashell;">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4">
+          <h2 class="about-title">About Trendify</h2>
+          <p class="about-text">
+            At Trendify, we redefine your online shopping experience. Our
+            mission is to bring the latest trends in fashion, gadgets, and
+            lifestyle products to your doorstep, all while ensuring
+            exceptional quality and unmatched convenience. Founded with a
+            passion for style and innovation, we aim to be your one-stop
+            destination for all things trendy and timeless.
+          </p>
+          <p class="about-text">
+            With a diverse collection of curated items and a commitment to
+            sustainability, we make shopping not just a task but a delightful
+            experience. Join thousands of happy customers who trust Trendify
+            for their everyday needs and special occasions.
+          </p>
+        </div>
+        <div class="col-lg-6 text-center" >
+          <img style="height: 200px;" src="Title1.png" alt="About Trendify" class="about-img" />
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="card about-card p-4 text-center">
+            <h5 class="fw-bold">Our Mission</h5>
+            <p>
+              To provide the best shopping experience with a focus on quality and
+              trends.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card about-card p-4 text-center">
+            <h5 class="fw-bold">Our Vision</h5>
+            <p>
+              To become the leading e-commerce platform for trendsetters
+              worldwide.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card about-card p-4 text-center">
+            <h5 class="fw-bold">Our Values</h5>
+            <p>
+              Customer satisfaction, innovation, sustainability, and
+              excellence in service.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Show popup once
+  window.addEventListener("load", () => {
+    const popup = document.getElementById("trendifyWelcomePopup");
+    const main = document.getElementById("mainWebsite");
+    const enterBtn = document.getElementById("enterSiteBtn");
+
+    enterBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+      main.style.display = "block";
+    });
+  });
+</script>
+  <script>
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+   let productCards = document.querySelectorAll(".deal-card");
+ 
+   if (productCards.length === 0) {
+     console.warn("No product cards found!");
+     return;
+   }
+ 
+   let today = new Date();
+   let daySeed = today.getDate(); // Use the date to change discounts daily
+ 
+   productCards.forEach((card, index) => {
+     let actualPrice = parseFloat(card.getAttribute("data-price"));
+ 
+     if (!isNaN(actualPrice) && actualPrice > 0) {
+       // Generate a unique discount for each product (changes daily)
+       let baseDiscount = ((index * 7 + daySeed) % 31) + 10; // Generates 10% - 40%
+       let discountPercentage = Math.min(Math.max(baseDiscount, 10), 40); // Ensure it's within bounds
+ 
+       // Generate fake original price variation based on actual price
+       let priceVariation =
+         actualPrice >= 1000
+           ? Math.floor(Math.random() * (200 - 50 + 1)) + 50 // ₹50 - ₹200 for 1000+
+           : actualPrice >= 100
+           ? Math.floor(Math.random() * (20 - 5 + 1)) + 5 // ₹5 - ₹20 for 100 - 999
+           : Math.floor(Math.random() * (5 - 1 + 1)) + 1; // ₹1 - ₹5 for < 100
+ 
+       let updatedPrice = actualPrice + priceVariation;
+ 
+       // Generate fake original price (inflated)
+       let fakeIncreasePercentage =
+         Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 10% - 30%
+       let increasedPrice = Math.round(
+         updatedPrice * (1 + fakeIncreasePercentage / 100)
+       );
+ 
+       // Calculate delivery date (1 week from today)
+       let deliveryDate = new Date(today);
+       deliveryDate.setDate(today.getDate() + 7);
+       let formattedDate = deliveryDate.toLocaleDateString("en-US", {
+         weekday: "long",
+         month: "long",
+         day: "numeric",
+       });
+ 
+       // Format price display
+       let formatPrice = (price) => `₹${price.toFixed(2)}`;
+ 
+       // Ensure these elements exist before updating
+       let originalPriceEl = card.querySelector(".original-price");
+       let discountPercentageEl = card.querySelector(".discount-percentage");
+       let finalPriceEl = card.querySelector(".final-price");
+ 
+       if (originalPriceEl && discountPercentageEl && finalPriceEl) {
+         originalPriceEl.innerText = formatPrice(increasedPrice);
+         discountPercentageEl.innerText = `-${discountPercentage}%`;
+         finalPriceEl.innerText = formatPrice(actualPrice);
+       } else {
+         console.error("Price elements missing in product card:", card);
+       }
+     } else {
+       console.error("Invalid product price:", actualPrice);
+     }
+   });
+ });
+ 
+   </script>
+ <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch('/cart/count')
+      .then(res => res.json())
+      .then(data => {
+        updateCartBadge(data.totalItems || 0);
+      })
+      .catch(err => {
+        console.error('Error fetching cart count:', err);
+      });
+  });
+
+  function updateCartBadge(count) {
+    const cartCountElem = document.getElementById('cart-count');
+    if (!cartCountElem) return; // safety check
+
+    if (count > 0) {
+      cartCountElem.textContent = count;
+      cartCountElem.style.display = 'inline';
+    } else {
+      cartCountElem.style.display = 'none';
+    }
+  }
+</script>
+
+<script>
+  
+  const allProducts = <%- JSON.stringify(products) %>;
+  
+  let groupIndex = 1; // We already rendered group 0
+
+  document.getElementById('showMoreBtn').addEventListener('click', () => {
+    const start = groupIndex * 4;
+    const end = start + 4;
+
+    if (start >= allProducts.length) {
+      document.getElementById('showMoreBtn').style.display = 'none';
+      return;
+    }
+
+    const card = document.createElement('div');
+    card.style.width = "100%";
+    card.style.maxWidth = "280px";
+    card.style.textAlign = "center";
+    card.style.background = "white";
+    card.style.padding = "15px";
+    card.style.borderRadius = "10px";
+    card.style.boxShadow = "0px 2px 8px rgba(0, 0, 0, 0.1)";
+
+    let html = `<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">`;
+
+    for (let i = start; i < end && i < allProducts.length; i++) {
+      html += `
+        <div style="text-align: center;">
+          <img src="${allProducts[i].imageUrl}" alt="${allProducts[i].title}"
+               style="width: 100%; max-height: 100px; object-fit: contain; border-radius: 5px;" />
+          <h6 style="font-size: 12px; font-weight: bold; color: #333; margin-top: 5px; white-space: normal;">
+            ${allProducts[i].title.split(" ").slice(0, 3).join(" ")}
+          </h6>
+        </div>
+      `;
+    }
+
+    html += `</div>
+             <a href="/all-products" style="display: block; margin-top: 15px; font-size: 14px; font-weight: bold; color: #007BFF; text-decoration: none;">Explore all</a>`;
+
+    card.innerHTML = html;
+    document.getElementById('productCardsContainer').appendChild(card);
+
+    groupIndex++;
+
+    if (groupIndex * 4 >= allProducts.length) {
+      document.getElementById('showMoreBtn').style.display = 'none';
+    }
+  });
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+  <script src="custom.js"></script>
+  <script src="effects.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="google-signin.js"></script>
+  <script src="facebook-signin.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+
+</html>

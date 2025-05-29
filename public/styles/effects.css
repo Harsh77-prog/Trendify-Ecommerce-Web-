@@ -1,0 +1,552 @@
+
+/*for AllProducts.ejs */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+#AProduct_card{
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/*For INDEX.EJS*/
+/* Add this to your style.css or AllCards.css */
+
+/* Keyframes for zoom-in effect with rotation */
+@keyframes zoomInRotate {
+    from {
+      opacity: 0;
+      transform: scale(0.8) rotate(-5deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  
+  /* Apply the animation to the cards */
+  .custom-card {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+ 
+
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Apply the animation to the custom2-cards */
+  .custom2-card {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  .custom2-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Apply the animation to the items */
+  .item1 img {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  .item1 img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Keyframes for image fade-in effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Apply the animation to the about-section */
+  .about-section .about-title,
+  .about-section .about-text {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  /* Apply the animation to the image */
+  .about-section .about-img {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Apply the animation to the cards */
+  .about-card {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Hover effect for the image */
+  .about-section .about-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Hover effect for the cards */
+  .about-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in and zoom-in effects */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Apply the animation to the video */
+  #img123 {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Apply the animation to the smaller grid images */
+  #imgSM {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Hover effect for the video */
+  #img123:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Hover effect for the smaller grid images */
+  #imgSM:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Apply the animation to the cart items */
+  #CartCard {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  /* Hover effect for the cart items */
+  #CartCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Apply the animation to the product cards */
+  #ProductCard .custom-card {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  /* Hover effect for the product cards */
+  #ProductCard .custom-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Add this to your style.css or AllCards.css */
+
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Apply the animation to the product card */
+  #ProductCard .product2Image, #ProductCard .product-title, #ProductCard .product-price, #ProductCard .btn-container, #ProductCard .ProductDescription {
+    opacity: 0;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+  }
+  
+  /* Hover effect for the product image */
+  #ProductCard .product2Image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(247, 247, 247, 0.15);
+  }
+  
+
+  .banner-wrapper {
+    overflow: hidden;
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+  }
+
+  .banner-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 15s linear infinite;
+  }
+
+  .banner-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: red;
+    margin-right: 100px;
+    white-space: nowrap;
+    text-shadow: 0 0 10px #fff6c8, 0 0 20px #fff6c8, 0 0 40px #fff6c8;
+    animation: lightning 1.5s infinite;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  
+
+  @media (max-width: 768px) {
+    .banner-text {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  #trendifyWelcomePopup {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #e0f7fa, #fffde7);
+    z-index: 9999;
+    overflow: hidden;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease;
+  }
+  
+  .popup-content {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .cartoon-video iframe {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .popup-heading {
+    font-size: 2.8rem;
+    color: #1a237e;
+    margin-bottom: 10px;
+  }
+  
+  .popup-heading span {
+    color: #00796b;
+  }
+  
+  .popup-subtitle {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  
+  #enterSiteBtn {
+    background-color: #00796b;
+    color: #fff;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 121, 107, 0.3);
+    transition: all 0.3s;
+    margin-top: 40px;
+  }
+  
+  #enterSiteBtn:hover {
+    background-color: #004d40;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+  
+  /* ======================
+     ✨ Flash Banners CSS 
+     ====================== */
+  .banners {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .banner {
+    position: absolute;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0.95;
+    background: linear-gradient(45deg, #8e2de2, #4a00e0); /* Purple gradient */
+    transform: rotate(-8deg);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    animation: float 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes float {
+    0% { transform: rotate(-8deg) translateY(0px); }
+    100% { transform: rotate(-8deg) translateY(-10px); }
+  }
+  
+  /* ========== Mobile Responsive ========== */
+  @media (max-width: 768px) {
+    .popup-heading {
+      font-size: 2rem;
+    }
+  
+    .popup-subtitle {
+      font-size: 1rem;
+    }
+  
+    .cartoon-video iframe {
+      height: 200px;
+    }
+  
+    #enterSiteBtn {
+      font-size: 1rem;
+      padding: 12px 24px;
+    }
+  
+    .banner {
+      font-size: 0.8rem;
+      padding: 8px 14px;
+    }
+  }
+  .popup-content {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    padding: 40px 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Banners positioned around popup-content */
+  .banners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  #showMoreBtn {
+    position: relative;
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  #showMoreBtn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0)
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    z-index: 0;
+  }
+
+  #showMoreBtn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 14px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #ffffff80,
+      transparent
+    );
+    z-index: 1;
+    animation: borderGlow 2s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes borderGlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  #showMoreBtn:hover::before {
+    left: 100%;
+    top: 100%;
+  }
+
+  #showMoreBtn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #5b0ecb 0%, #1e60f7 100%);
+  }
+
+  #showMoreBtn span {
+    position: relative;
+    z-index: 2;
+  }

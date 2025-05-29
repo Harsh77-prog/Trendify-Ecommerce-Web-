@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendify</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="icon" href="E-Commerce-logo.jpeg" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+
+<body style="background-color: seashell">
+  <!-- Navbar 1 -->
+  <nav class="navbar navbar-expand-lg" id="navbar1" style="background-color:rgb(209, 168, 123)">
+    <div class="container-fluid">
+      <!-- Search Form centered in Navbar -->
+      <form  class="d-flex mx-auto" role="search" action="/search" method="GET">
+        <input type="text" name="q" required class="form-control" type="search" placeholder="Search" aria-label="Search"
+          style="background-color: white" id="searchInput2" />
+        <button class="btn btn-outline-dark" type="submit" style="
+              background-color: rgb(240, 240, 240);
+              padding: 0px;
+              width: 40px;
+            " id="searchButton2">
+          <img src="https://static.vecteezy.com/system/resources/previews/016/716/177/original/search-3d-icon-png.png"
+            style="
+                object-fit: cover;
+                width: 20px;
+                height: 20px;
+                margin: 0px;
+                padding: 0px;
+              " />
+        </button>
+      </form>
+    </div>
+  </nav>
+  
+
+  <nav class="navbar navbar-expand-lg" style="background-color:rgb(255, 209, 176);" id="navbar2">
+
+
+    <ul class="navbar-nav" style="display: flex; flex-direction: row; align-items: center;">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/home" style="color: white">
+          <img src="Home.png" style="object-fit: contain; width: 30px; height: 30px;">
+        </a>
+      </li>
+    
+      <li class="nav-item" id="nav-cart">
+        <a class="nav-link active" aria-current="page" href="/cart" style="color: black; position: relative;">
+          <img src="cart.png" style="object-fit: contain; width:30px; height: 30px;">
+          <span class="cart-text">Cart</span>
+          <span id="cart-count" 
+    style="position: absolute; top: 0px; right: 0px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">
+</span>
+
+        </a>
+      </li>
+      <li class="nav-item" id="nav-orders">
+        <a class="nav-link active" aria-current="page" href="/my-orders" style="color: white">
+          <img src="Order.png"
+          style="object-fit: contain; width: 30px; height: 30px;">
+          <span class="cart-text">Orders</span>
+        </a>
+      </li>
+    
+      <li class="nav-item" id="SearchIcon">
+        <a class="nav-link active" aria-current="page" href="/SearchProduct" style="color: white">
+          <img src="Search.png"
+          style="object-fit: contain; width: 30px; height: 30px;">
+        </a>
+      </li>
+    </ul>
+
+<div class="d-flex justify-content-end" style="position: fixed; right: 0;">
+  <div class="dropdown">
+    <button class="d-flex align-items-center justify-content-center"
+    id="Log_Button" type="button" data-bs-toggle="dropdown"
+    aria-expanded="false" 
+    style="background-color: white; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; padding: 0; border: none;">
+<% if (username) { %>
+    <span style="font-size: 18px; font-weight: bold; color: black;">
+        <%= username.charAt(0).toUpperCase() %>
+    </span>
+<% } else { %>
+    <img id="Log_Buttonimage"
+        src="https://static.vecteezy.com/system/resources/previews/000/550/731/original/user-icon-vector.jpg"
+        alt="User Icon"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+<% } %>
+</button>
+  
+    <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(226, 226, 226)">
+      <li class="nav-item" style="margin-top: 15px">
+        <a class="nav-link" href="/signup" style="
+              color: black;
+              text-align: center;
+              font-size: 20px;
+              font-weight: bolder;
+            ">Signup</a>
+      </li>
+      <li class="nav-item" style="margin-top: 15px">
+        <a class="nav-link" href="/login" style="
+              color: black;
+              text-align: center;
+              font-size: 20px;
+              font-weight: bolder;
+            ">Login</a>
+      </li>
+      <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+        <a class="nav-link" href="/logout" style="
+              color: black;
+              text-align: center;
+              font-size: 20px;
+              font-weight: bolder;
+            ">Logout</a>
+      </li>
+      <li class="nav-item" style="margin-top: 15px; margin-bottom: 15px">
+        <a class="nav-link" href="/admin-Form" style="
+              color: black;
+              text-align: center;
+              font-size: 20px;
+              font-weight: bolder;
+            ">Admin</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch('/cart/count')
+      .then(res => res.json())
+      .then(data => {
+        updateCartBadge(data.totalItems || 0);
+      })
+      .catch(err => {
+        console.error('Error fetching cart count:', err);
+      });
+  });
+
+  function updateCartBadge(count) {
+    const cartCountElem = document.getElementById('cart-count');
+    if (!cartCountElem) return; // safety check
+
+    if (count > 0) {
+      cartCountElem.textContent = count;
+      cartCountElem.style.display = 'inline';
+    } else {
+      cartCountElem.style.display = 'none';
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+<script src="app.js"></script>
+<script src="custom.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="google-signin.js"></script>
+<script src="facebook-signin.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+
+</html>

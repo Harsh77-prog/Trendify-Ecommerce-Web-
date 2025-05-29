@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trendify</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/Order.css" />
+
+    <link rel="icon" href="https://media-hosting.imagekit.io//2044e1bafb954e28/E-Commerce-logo.jpeg?Expires=1835616631&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=MRWh8tdTKzHpzSVKZQlxJ74MvcuJYLXTSmBQDPHCRhBLIJ-WPBU-i-PEz6qkTzkWcVCbvzCcvebSw8cAMVO7o28rOA5dzQ1OfYnzq-uAce0jRFk82F7RBLL5tUT1ZjMcLI26KNp4yPvw3etXADJABf7LB3m96FE9sitvfaWQeZlP-VKafiIgN0cgJeOo4q9UTcBCwarQEVapkt5-HGso3xkwYfc5NF~Y3Cy1lkjxlhPWGSFr8Z6rmPTwwNc78l7WL991RM~SQUvec8PpanQuKwK4VZOlDPf~jXe1G-6I316ctPPgbLwTIsme3ihyfHFfwkpSHUP20cCGl~mlH9y2uw__" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    
+    <nav
+    class="navbar navbar-expand-lg"
+    style="background-color:rgb(209, 168, 123) ; position: fixed; top:0; width: 100%;"
+    id="adminNav"
+    
+  >
+  
+    <div class="container-fluid">
+      <!-- Title at the left end -->
+      <a class="navbar-brand" href="#" style="color: black" id="navbarBrand">
+        <h4>Orders</h4>
+      </a>
+    </div>
+    <div class="dropdown" style="position: fixed; right: 0%;">
+        <button class="btn btn-secondary dropdown-toggle fw-semibold px-4 py-2 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Excel Sheet
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/admin/orders/excel/view" target="_blank">Download !</a></li>
+        </ul>
+      </div>
+  </nav>
+
+  <div class="container py-5 mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded shadow-sm bg-light">
+        <div class="px-4 py-2 bg-info bg-opacity-25 rounded-3">
+            <h2 class="text-center mb-0  fw-bold">All Orders (Admin View)</h2>
+        </div>
+        <a href="/home" class="btn btn-primary fw-semibold px-4 py-2 shadow-sm">Home</a>
+    </div>
+    
+
+    <% if (orders.length === 0) { %>
+        <p class="text-center mt-4">No orders found.</p>
+    <% } else { %>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mt-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Size</th>
+                        <th>Total Price</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th >Actions</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(order => { %>
+                        <tr id="order-<%= order._id %>">
+                            <td class="text-nowrap"><%= order._id %></td>
+                            <td class="text-nowrap"><%= order.address %></td>
+                            <td class="text-nowrap"><%= order.product?.title || "<span class='text-danger'>Product Deleted</span>" %></td>
+                            <td class="text-center"><%= order.quantity %></td>
+                            <td class="text-center"><%= order.selectedSize %></td>
+                            <td class="text-center">₹<%= order.totalPrice %></td>
+                            <td class="text-center"><%= order.paymentMethod %></td>
+                            <td class="text-center">
+                                <span  style ="width:200px;"class="status-badge badge <%= order.status === 'Delivered' ? 'bg-success' : 'bg-warning' %>">
+                                    <%= order.status %>
+                                </span>
+                            </td>
+                            <td class="text-center " >
+                                <% if (order.status !== 'Delivered') { %>
+                                    <button type="button" class="btn btn-success btn-sm" onclick="markDelivered('<%= order._id %>', this)">Delivered</button>
+                                <% } else { %>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled>Delivered</button>
+                                <% } %>
+                                
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger btn-sm" onclick="deleteOrder('<%= order._id %>')">Delete</button>
+                            </td>
+                                
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    async function markDelivered(orderId, button) {
+        try {
+            const response = await fetch(`/admin/orders/update-status/${orderId}`, { method: "PUT" });
+            const result = await response.json();
+
+            if (result.success) {
+                button.classList.replace("btn-success", "btn-secondary");
+                button.textContent = "Delivered";
+                button.disabled = true;
+
+                const statusBadge = button.closest("tr").querySelector(".status-badge");
+                statusBadge.classList.replace("bg-warning", "bg-success");
+                statusBadge.textContent = "Delivered";
+
+                Swal.fire("Updated!", "Order marked as Delivered.", "success");
+            } else {
+                Swal.fire("Error!", result.message, "error");
+            }
+        } catch (error) {
+            Swal.fire("Error!", "Something went wrong.", "error");
+        }
+    }
+
+    async function deleteOrder(orderId) {
+        const confirmDelete = await Swal.fire({
+            title: "Are you sure?",
+            text: "This order will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        });
+
+        if (confirmDelete.isConfirmed) {
+            try {
+                const response = await fetch(`/admin/orders/delete/${orderId}`, { method: "DELETE" });
+
+                if (response.ok) {
+                    document.getElementById(`order-${orderId}`).remove();
+                    Swal.fire("Deleted!", "The order has been removed.", "success");
+                } else {
+                    Swal.fire("Error!", "Failed to delete the order.", "error");
+                }
+            } catch (error) {
+                Swal.fire("Error!", "Something went wrong.", "error");
+            }
+        }
+    }
+</script>
+
+    
+  
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+    <script src="effects.js"></script>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="google-signin.js"></script>
+    <script src="facebook-signin.js"></script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+  </body>
+</html>
