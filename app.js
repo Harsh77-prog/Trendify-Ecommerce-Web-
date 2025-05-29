@@ -14,6 +14,7 @@ const Order = require("./models/Order.js"); // Ensure correct path
 const axios = require("axios");
 const passport = require("passport"); // Import passport
 const ExcelJS = require('exceljs');
+require('dotenv').config();
 
 
 
@@ -42,7 +43,7 @@ app.use(passport.session());
 
 // ✅ Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/e-commerce")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
