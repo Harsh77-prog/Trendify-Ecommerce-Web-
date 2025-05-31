@@ -282,10 +282,28 @@
                             product.sizes[0].size;
                             %>
                             <a id="buyNowBtn" href="#"
-                              class="btn <% if (product.stock !== 0 && hasSize) { %>btn-primary<% } else { %>btn-secondary<% } %>"
-                              <% if (product.stock===0 || !hasSize) { %>disabled<% } %>>
-                                <% if (product.stock !==0 && hasSize) { %>Buy Now<% } else { %>Unavailable<% } %>
-                            </a>
+   class="btn 
+     <% if (product.category === 'fashion') { %>
+       <% if (product.stock !== 0 && hasSize) { %>btn-primary<% } else { %>btn-secondary<% } %>
+     <% } else { %>
+       <% if (product.stock !== 0) { %>btn-primary<% } else { %>btn-secondary<% } %>
+     <% } %>"
+   
+   <% if (
+     (product.category === 'fashion' && (product.stock === 0 || !hasSize)) ||
+     (product.category !== 'fashion' && product.stock === 0)
+   ) { %>disabled<% } %>>
+   
+   <% if (
+     (product.category === 'fashion' && product.stock !== 0 && hasSize) ||
+     (product.category !== 'fashion' && product.stock !== 0)
+   ) { %>
+     Buy Now
+   <% } else { %>
+     Unavailable
+   <% } %>
+</a>
+
 
                             <button class="btn btn-primary add-to-cart-btn" data-product-id="<%= product._id %>">
                               Add to Cart
