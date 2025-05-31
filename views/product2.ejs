@@ -629,54 +629,57 @@
           }
         }
       </script>
-      <script>
-        let selectedSize = null;
-        let selectedColor = null;
+      <% if (product.category === "fashion") { %>
+<script>
+  let selectedSize = null;
+  let selectedColor = null;
 
-        const buyNowButton = document.querySelector('#buyNowBtn');
-        const productId = "<%= product._id %>";
+  const buyNowButton = document.querySelector('#buyNowBtn');
+  const productId = "<%= product._id %>";
 
-        // Handle size selection
-        document.querySelectorAll('.size-circle').forEach(circle => {
-          circle.addEventListener('click', function () {
-            // Remove previous selection
-            document.querySelectorAll('.size-circle').forEach(item => item.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedSize = this.getAttribute('data-size');
-            updateBuyNowLink();
-          });
-        });
+  // Handle size selection
+  document.querySelectorAll('.size-circle').forEach(circle => {
+    circle.addEventListener('click', function () {
+      // Remove previous selection
+      document.querySelectorAll('.size-circle').forEach(item => item.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedSize = this.getAttribute('data-size');
+      updateBuyNowLink();
+    });
+  });
 
-        // Handle color image selection
-        document.querySelectorAll('.selectable-color-image').forEach(img => {
-          img.addEventListener('click', function () {
-            // Deselect all first
-            document.querySelectorAll('.selectable-color-image').forEach(i => {
-              i.style.border = '2px solid transparent';
-            });
+  // Handle color image selection
+  document.querySelectorAll('.selectable-color-image').forEach(img => {
+    img.addEventListener('click', function () {
+      // Deselect all first
+      document.querySelectorAll('.selectable-color-image').forEach(i => {
+        i.style.border = '2px solid transparent';
+      });
 
-            // Highlight selected
-            this.style.border = '2px solid #007bff';
-            selectedColor = this.getAttribute('data-color-url');
-            updateBuyNowLink();
-          });
-        });
+      // Highlight selected
+      this.style.border = '2px solid #007bff';
+      selectedColor = this.getAttribute('data-color-url');
+      updateBuyNowLink();
+    });
+  });
 
-        // Update Buy Now button based on selections
-        function updateBuyNowLink() {
-          if (selectedSize && selectedColor) {
-            buyNowButton.href = `/place-order?product_id=${productId}&size=${encodeURIComponent(selectedSize)}&color=${encodeURIComponent(selectedColor)}&quantity=1`;
-          }
-        }
+  // Update Buy Now button based on selections
+  function updateBuyNowLink() {
+    if (selectedSize && selectedColor) {
+      buyNowButton.href = `/place-order?product_id=${productId}&size=${encodeURIComponent(selectedSize)}&color=${encodeURIComponent(selectedColor)}&quantity=1`;
+    }
+  }
 
-        // Prevent empty selections
-        buyNowButton.addEventListener("click", function (e) {
-          if (!selectedSize || !selectedColor) {
-            e.preventDefault();
-            alert("Please select both a size and a color before continuing.");
-          }
-        });
-      </script>
+  // Prevent empty selections
+  buyNowButton.addEventListener("click", function (e) {
+    if (!selectedSize || !selectedColor) {
+      e.preventDefault();
+      alert("Please select both a size and a color before continuing.");
+    }
+  });
+</script>
+<% } %>
+
 
       <script>
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
