@@ -248,13 +248,13 @@
                               <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
                             </a>
                               <div class="card-body d-flex flex-column" id="scrollBody" >
-                                  <!-- Title limited to 1 line -->
+                                 
                                   <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
                                       <%= product.title %>
                                     </a>
                                   </h5>
-                                  <!-- Description limited to 2 lines -->
+                                  
                                   <div class="deal-card" data-price="<%= product.price %>" >
                                     <span class="deal-tag">Limited time deal</span>
                                     <div class="price-container">
@@ -276,7 +276,7 @@
                                     
                                      
                                       
-                                      <!-- Display only stars -->
+                                     
                                       <p id="indexrating">
                                         <strong>Rating:</strong> 
                                         <% for (let i = 1; i <= 5; i++) { %>
@@ -340,13 +340,13 @@
                               <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
                             </a>
                               <div class="card-body d-flex flex-column" id="scrollBody">
-                                  <!-- Title limited to 1 line -->
+                                  
                                   <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
                                       <%= product.title %>
                                     </a>
                                   </h5>
-                                  <!-- Description limited to 2 lines -->
+                                   
                                   <div class="deal-card" data-price="<%= product.price %>">
                                     <span class="deal-tag">Limited time deal</span>
                                     <div class="price-container">
@@ -368,7 +368,7 @@
                                     
                                      
                                       
-                                      <!-- Display only stars -->
+                                       
                                       <p id="indexrating">
                                         <strong>Rating:</strong> 
                                         <% for (let i = 1; i <= 5; i++) { %>
@@ -426,12 +426,12 @@
     <br>
     
 
-   <!-- 🌫️ Glassmorphism Container -->
+  
 <div style="padding:5px; margin: 20px auto;margin-top: 0px; max-width: 1400px; border-radius: 20px;
 background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px);
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
 
-  <!-- 🔳 Product Cards Container -->
+  
   <div id="productCardsContainer" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
     <% const visibleCount=10; // Show 10 cards × 4 products=40 %>
       <% for (let i=0; i < visibleCount * 4 && i < products.length; i +=4) { %>
@@ -472,7 +472,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
                                     
                                      
                                       
-                                      <!-- Display only stars -->
+                                       
                                       <p id=" indexrating" style="font-size: 10px; margin: 4px 0; line-height: 1;">
                       <strong style="font-size: 10px;">Rating:</strong>
                       <% for (let i=1; i <=5; i++) { %>
@@ -506,7 +506,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
 
 </div>
 
-<!-- 🔘 Show More Button -->
+
 
 
   <div class="container-fluid text-light text-center py-3" style="background-color: seashell;">
@@ -529,13 +529,13 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
                               <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" />
                               </a>
                               <div class="card-body d-flex flex-column" id="scrollBody">
-                                  <!-- Title limited to 1 line -->
+                                  
                                   <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
                                       <%= product.title %>
                                     </a>
                                   </h5>
-                                  <!-- Description limited to 2 lines -->
+                                   
                                   <div class="deal-card" data-price="<%= product.price %>" >
                                     <span class="deal-tag">Limited time deal</span>
                                     <div class="price-container">
@@ -557,14 +557,14 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
                                     
                                      
                                       
-                                      <!-- Display only stars -->
+                                       
                                       <p id="indexrating">
                                         <strong>Rating:</strong> 
                                         <% for (let i = 1; i <= 5; i++) { %>
                                           <% if (i <= bestReview.rating) { %>
-                                            <i class="fas fa-star" style="color: gold;"></i> <!-- Filled star -->
+                                            <i class="fas fa-star" style="color: gold;"></i> 
                                           <% } else { %>
-                                            <i class="far fa-star" style="color: lightgray;"></i> <!-- Empty star -->
+                                            <i class="far fa-star" style="color: lightgray;"></i>
                                           <% } %>
                                         <% } %>
                                       </p>
@@ -631,14 +631,14 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
                               <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>" loading="lazy"/>
                             </a>
                               <div class="card-body d-flex flex-column" id="scrollBody">
-                                  <!-- Title limited to 1 line -->
+                                  
         
                                   <h5 class="card-title text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <a href="/product/<%= product._id %>" style="text-decoration: none; color: inherit;">
                                       <%= product.title %>
                                     </a>
                                   </h5>
-                                  <!-- Description limited to 2 lines -->
+                                   
                                   <div class="deal-card" data-price="<%= product.price %>" >
                                     <span class="deal-tag">Limited time deal</span>
                                     <div class="price-container">
@@ -660,7 +660,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255,
                                     
                                      
                                       
-                                      <!-- Display only stars -->
+                                       
                                       <p>
                                         <strong>Rating:</strong> 
                                         <% for (let i = 1; i <= 5; i++) { %>
