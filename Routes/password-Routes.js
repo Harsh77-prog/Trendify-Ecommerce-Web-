@@ -36,7 +36,7 @@ router.post('/forgot-password', async (req, res) => {
     user.resetTokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
   
-    const resetLink = `https://51d5-2405-201-501f-c841-a4a2-a1de-89f0-7ff4.ngrok-free.app/reset-password?token=${token}`;
+    const resetLink = `https://trendify-ecommerce-web.onrender.com/reset-password?token=${token}`;
   
     const emailHtml = await ejs.renderFile(
       path.join(__dirname, '../views/reset-password-email.ejs'), 

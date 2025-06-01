@@ -282,28 +282,10 @@
                             product.sizes[0].size;
                             %>
                             <a id="buyNowBtn" href="#"
-   class="btn 
-     <% if (product.category === 'fashion') { %>
-       <% if (product.stock !== 0 && hasSize) { %>btn-primary<% } else { %>btn-secondary<% } %>
-     <% } else { %>
-       <% if (product.stock !== 0) { %>btn-primary<% } else { %>btn-secondary<% } %>
-     <% } %>"
-   
-   <% if (
-     (product.category === 'fashion' && (product.stock === 0 || !hasSize)) ||
-     (product.category !== 'fashion' && product.stock === 0)
-   ) { %>disabled<% } %>>
-   
-   <% if (
-     (product.category === 'fashion' && product.stock !== 0 && hasSize) ||
-     (product.category !== 'fashion' && product.stock !== 0)
-   ) { %>
-     Buy Now
-   <% } else { %>
-     Unavailable
-   <% } %>
-</a>
-
+                              class="btn <% if (product.stock !== 0) { %>btn-primary<% } else { %>btn-secondary<% } %>"
+                              <% if (product.stock===0 || !hasSize) { %>disabled<% } %>>
+                                <% if (product.stock !==0 ) { %>Buy Now<% } else { %>Unavailable<% } %>
+                            </a>
 
                             <button class="btn btn-primary add-to-cart-btn" data-product-id="<%= product._id %>">
                               Add to Cart
@@ -646,8 +628,9 @@
             cartCountElem.style.display = 'none';
           }
         }
-      </script>
-      <% if (product.category === "fashion") { %>
+
+        </script>
+
 <script>
   let selectedSize = null;
   let selectedColor = null;
@@ -655,49 +638,61 @@
   const buyNowButton = document.querySelector('#buyNowBtn');
   const productId = "<%= product._id %>";
 
-  // Handle size selection
-  document.querySelectorAll('.size-circle').forEach(circle => {
-    circle.addEventListener('click', function () {
-      // Remove previous selection
-      document.querySelectorAll('.size-circle').forEach(item => item.classList.remove('selected'));
-      this.classList.add('selected');
-      selectedSize = this.getAttribute('data-size');
-      updateBuyNowLink();
-    });
-  });
+  const sizeOptionsExist = <%= product.sizes.length > 0 %>;
+  const colorOptionsExist = <%= product.colorImages.length > 0 %>;
 
-  // Handle color image selection
-  document.querySelectorAll('.selectable-color-image').forEach(img => {
-    img.addEventListener('click', function () {
-      // Deselect all first
-      document.querySelectorAll('.selectable-color-image').forEach(i => {
-        i.style.border = '2px solid transparent';
-      });
-
-      // Highlight selected
-      this.style.border = '2px solid #007bff';
-      selectedColor = this.getAttribute('data-color-url');
-      updateBuyNowLink();
-    });
-  });
-
-  // Update Buy Now button based on selections
   function updateBuyNowLink() {
-    if (selectedSize && selectedColor) {
-      buyNowButton.href = `/place-order?product_id=${productId}&size=${encodeURIComponent(selectedSize)}&color=${encodeURIComponent(selectedColor)}&quantity=1`;
-    }
+    const sizeToSend = sizeOptionsExist ? (selectedSize || "") : "M";
+    const colorToSend = colorOptionsExist ? (selectedColor || "") : "0";
+
+    buyNowButton.href = `/place-order?product_id=${productId}&size=${encodeURIComponent(sizeToSend)}&color=${encodeURIComponent(colorToSend)}&quantity=1`;
   }
 
-  // Prevent empty selections
+  // Size selection
+  if (sizeOptionsExist) {
+    document.querySelectorAll('.size-circle').forEach(circle => {
+      circle.addEventListener('click', function () {
+        document.querySelectorAll('.size-circle').forEach(item => item.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedSize = this.getAttribute('data-size');
+        updateBuyNowLink();
+      });
+    });
+  } else {
+    selectedSize = "M";
+  }
+
+  // Color selection
+  if (colorOptionsExist) {
+    document.querySelectorAll('.selectable-color-image').forEach(img => {
+      img.addEventListener('click', function () {
+        document.querySelectorAll('.selectable-color-image').forEach(i => i.style.border = '2px solid transparent');
+        this.style.border = '2px solid #007bff';
+        selectedColor = this.getAttribute('data-color-url');
+        updateBuyNowLink();
+      });
+    });
+  } else {
+    selectedColor = "0";
+  }
+
+  // Validation on Buy Now click
   buyNowButton.addEventListener("click", function (e) {
-    if (!selectedSize || !selectedColor) {
+    if (sizeOptionsExist && !selectedSize) {
       e.preventDefault();
-      alert("Please select both a size and a color before continuing.");
+      alert("Please select a size.");
+      return;
+    }
+    if (colorOptionsExist && !selectedColor) {
+      e.preventDefault();
+      alert("Please select a color.");
+      return;
     }
   });
-</script>
-<% } %>
 
+  // Initial link
+  updateBuyNowLink();
+</script>
 
       <script>
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {

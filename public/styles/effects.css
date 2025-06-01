@@ -550,3 +550,46 @@
     position: relative;
     z-index: 2;
   }
+  .custom-btn {
+  background-color: rgb(209, 168, 123);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(209, 168, 123, 0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 40%);
+  animation: shine 2s infinite linear;
+  z-index: 1;
+}
+
+.custom-btn:hover {
+  background-color: rgb(180, 140, 100);
+  box-shadow: 0 6px 25px rgba(209, 168, 123, 0.7);
+  transform: translateY(-2px);
+}
+
+.custom-btn:active {
+  transform: scale(0.98);
+}
+
+@keyframes shine {
+  0% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translate(100%, 100%);
+  }
+}
