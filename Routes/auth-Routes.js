@@ -233,7 +233,7 @@ passport.use(
     {
       clientID: "448224624764815",
       clientSecret: "4342413b577e777576506e2012ed9e8f",
-      callbackURL: "https://trendify-ecommerce-web.onrender.com/auth/facebook/callback",
+      callbackURL: "https://trendify-ecommerce-web.onrender.com//auth/facebook/callback",
       profileFields: ["id", "emails", "name"], // Ensure email is retrieved
     },
     async function (accessToken, refreshToken, profile, done) {
